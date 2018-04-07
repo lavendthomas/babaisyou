@@ -1,0 +1,48 @@
+18 18
+baba 5 11
+left 4 4
+is 5 5
+monster 5 1 0
+monster 2 3 2
+monster 14 5 1
+monster 2 12 1
+monster 9 13 0
+monster 16 16 2
+text_baba 4 14
+is 5 14
+you 6 14
+text_monster 11 14
+is 12 14
+move 13 14
+text_wall 2 0
+is 3 0
+stop 4 0
+text_lava 11 0
+is 12 0
+kill 13 0
+love 8 4 3
+lava 8 6
+lava 8 7
+lava 8 8
+lava 8 9
+wall 7 3
+wall 7 4
+wall 7 5
+wall 7 6
+wall 7 7
+wall 7 8
+wall 7 9
+wall 7 10
+wall 9 3
+wall 9 4
+wall 9 5
+wall 9 6
+wall 9 7
+wall 9 8
+wall 9 9
+wall 9 10
+wall 8 3
+wall 10 8
+text_love 10 5
+is 10 6
+win 10 7

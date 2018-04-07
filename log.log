@@ -1,0 +1,8 @@
+avr. 07, 2018 12:30:35 PM be.ac.umons.babaisyou.gui.ServerChoiceScene play
+INFOS: Connecting to server : http://192.168.1.9:8081/baba/
+avr. 07, 2018 12:30:35 PM be.ac.umons.babaisyou.gui.LevelPackOnline <init>
+INFOS: Downloading http://192.168.1.9:8081/baba/order
+avr. 07, 2018 12:30:38 PM be.ac.umons.babaisyou.gui.LevelPackOnline <init>
+AVERTISSEMENT: Unable to download http://192.168.1.9:8081/baba/order : Aucun chemin d'accès pour atteindre l'hôte cible (Host unreachable)
+avr. 07, 2018 12:30:38 PM be.ac.umons.babaisyou.gui.ServerChoiceScene play
+AVERTISSEMENT: Incomaptible server at http://192.168.1.9:8081/baba/

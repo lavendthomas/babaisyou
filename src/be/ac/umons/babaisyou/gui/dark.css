@@ -1,0 +1,21 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.root{
+    -fx-background-color: #333333;
+    -fx-text-fill: #FFFFFF;
+}
+.label{
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 16px
+}
+.button{
+	-fx-background-color: #292929;
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 16px
+}
+.list-view {
+	-fx-background-color: #292929;
+}
+.combo-box {
+	-fx-background-color: #292929;
+	-fx-text-fill: #FFFFFF;
+}

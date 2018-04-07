@@ -1,0 +1,42 @@
+18 18
+text_wall 4 4
+is 5 4
+stop 6 4
+text_rock 11 4
+is 12 4
+push 13 4
+wall 3 6
+wall 4 6
+wall 5 6
+wall 6 6
+wall 7 6
+wall 8 6
+wall 9 6
+wall 10 6
+wall 11 6
+wall 12 6
+wall 13 6
+wall 14 6
+baba 1 8 3
+flag 12 8 1
+rock 8 7 0
+rock 8 8 2
+rock 8 9 1
+wall 3 10
+wall 4 10
+wall 5 10
+wall 6 10
+wall 7 10
+wall 8 10
+wall 9 10
+wall 10 10
+wall 11 10
+wall 12 10
+wall 13 10
+wall 14 10
+text_baba 4 12
+is 5 12
+you 6 12
+text_flag 11 12
+is 12 12
+win 13 12
