@@ -133,6 +133,21 @@ public enum Direction {
 				throw new NotADirectionException();
 		}
 	}
+	
+	public Direction getOpposite() {
+		switch (this) {
+		case UP:
+			return DOWN;
+		case RIGHT:
+			return LEFT;
+		case LEFT:
+			return RIGHT;
+		case DOWN:
+			return UP;
+		default:
+			throw new RuntimeException(new NotADirectionException());
+		}
+	}
 
 
 }

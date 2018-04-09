@@ -5,7 +5,7 @@ import be.ac.umons.babaisyou.exceptions.NotADirectionException;
 
 /**
  * Modélise une carte d'un niveau
- * @author thomas
+ * @author Thomas Lavend'Homme
  *
  */
 public class Board {
@@ -127,6 +127,42 @@ public class Board {
 		return get(position);
 	}
 	
+	/**
+	 * Change la direction du block de type mensionné vers la direction mensionnée
+	 * @param type Le type du block dont il faut changer la direction
+	 * @param position La position du block dont il faut faut changer la direction
+	 * @param direction La nouvelle direction
+	 */
+	void changeBlockDirection(BlockType type, Position position, Direction direction) {
+		for (Block block : get(position)) {
+			if (block.isSameType(type)) {
+				block.setDirection(direction);
+			}
+		}
+	}
+	
+	/**
+	 * Change la direction du block de type mensionné vers la direction oppossée
+	 * @param type Le type du block dont il faut changer la direction
+	 * @param position La position du block dont il faut faut changer la direction
+	 */
+	void oppositeBlockDirection(BlockType type, Position position) {
+		for (Block block : get(position)) {
+			if (block.isSameType(type)) {
+				block.oppositeDirection();
+			}
+		}
+	}
+	
+	/**
+	 * Change la position du block de type mensionné vers la position opposée
+	 * @param type la type de la 
+	 * @param position
+	 * @param direction
+	 */
+	void oppositeBlockDirection(BlockType type, Position position, Direction direction) {
+		
+	}
 	
 	/**
 	 * Utilisé pour renvoyer l'état sous forme de chîne de caratère pour la sauvegarde

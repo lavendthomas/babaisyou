@@ -2,7 +2,7 @@ package be.ac.umons.babaisyou.game;
 
 /**
  * Modélise un block du jeu.
- * @author thomas
+ * @author Thomas Lavend'Homme
  *
  */
 public class Block {
@@ -51,9 +51,22 @@ public class Block {
 		return type;
 	}
 	
-	public void setType(BlockType type) {
+	void setType(BlockType type) {
 		this.type = type;
 	}
+	
+	/**
+	 * Change la direction par défaut du block
+	 * @param direction La nouvelle direction du block
+	 */
+	void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+	
+	void oppositeDirection() {
+		direction = direction.getOpposite();
+	}
+	
 	
 	public Direction getDirection() {
 		return direction;

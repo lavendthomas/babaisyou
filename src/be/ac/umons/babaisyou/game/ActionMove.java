@@ -7,7 +7,7 @@ public class ActionMove extends Action {
 
 	@Override
 	public void execute(Block block, Position player_position, Direction player_direction) {
-		// TODO Auto-generated method stub
+		//Ne rien faire
 		
 	}
 
@@ -27,10 +27,13 @@ public class ActionMove extends Action {
 			}
 		}
 		
-		//TODO garder une liste de position pour chaque monster...
-		
 		for (Position pos : movingBlocksPositions) {
-			level.moveOneBlock(type, pos);
+			boolean hasMoved = level.moveOneBlock(type, pos);
+			if (!hasMoved) {
+				//Mettre le montre dans la direction opposée
+				level.oppositeBlockDirection(type, pos);
+				level.moveOneBlock(type, pos);
+			}
 		}
 		
 	}

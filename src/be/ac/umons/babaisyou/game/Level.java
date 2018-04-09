@@ -184,6 +184,30 @@ public class Level {
 	}
 	
 	/**
+	 * Change la direction du block de type mensionné vers la direction mensionnée
+	 * @param type Le type du block dont il faut changer la direction
+	 * @param position La position du block dont il faut faut changer la direction
+	 * @param direction La nouvelle direction
+	 */
+	void changePlayerDirection(BlockType type, Position position, Direction direction) {
+		if (hasBlockType(type, position)) {
+			board.changeBlockDirection(type, position, direction);
+		}
+		
+	}
+	
+	/**
+	 * Change la direction du block de type mensionné vers la direction oppossée
+	 * @param type Le type du block dont il faut changer la direction
+	 * @param position La position du block dont il faut faut changer la direction
+	 */
+	void oppositeBlockDirection(BlockType type, Position position) {
+		if (hasBlockType(type, position)) {
+			board.oppositeBlockDirection(type, position);
+		}
+	}
+	
+	/**
 	 * Permet aux règles de définir si le joueur a réussi le niveau.
 	 * @param hasWon
 	 */
@@ -310,11 +334,12 @@ public class Level {
 	 * Déplace un Block à la position mensionnée dans sa direction par défaut.
 	 * @param type Le type de block que l'on veux déplacer.
 	 * @param position La position originale du bloc que l'on veux déplacer
+	 * @return un booléen si un bloc a été déplacé ou pas
 	 */
-	void moveOneBlock(BlockType type, Position position) {
+	boolean moveOneBlock(BlockType type, Position position) {
+		boolean hasMoved = false;
 		for (Block block : get(position)) {
 			if (block.getType() == type) {
-				//TODO FAIRE TOUT LE BORDEL
 				Direction direction = block.getDirection();
 				if (canMove(position, direction)) {
 					
@@ -326,6 +351,7 @@ public class Level {
 					}
 					
 					board.add(player, nextPosition);
+					hasMoved = true;
 					
 					/*
 					 * Lancer les actions pour les blocks sur lesquels les joueurs tombent
@@ -337,6 +363,7 @@ public class Level {
 				
 			}
 		}
+		return hasMoved;
 		
 	}
 	
