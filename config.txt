@@ -1,5 +1,0 @@
-key_up:Up
-key_down:Down
-key_left:Left
-key_right:Right
-key_reload:R

@@ -1,3 +1,9 @@
+#config data
+config.txt
+
+#Binary data
+bin/*
+
 #Server data
 servers/*
 
@@ -5,7 +11,7 @@ servers/*
 .classpath
 .project
 .settings/*
-
+*.finished
 
 # Compiled class file
 *.class
