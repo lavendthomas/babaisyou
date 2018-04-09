@@ -78,7 +78,7 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="run">
+    <target name="run" depends="build">
         <java classname="be.ac.umons.babaisyou.gui.Main" failonerror="true" fork="yes">
             <classpath refid="babaisyou.classpath"/>
         </java>

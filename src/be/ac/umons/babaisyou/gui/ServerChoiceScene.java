@@ -1,9 +1,11 @@
 package be.ac.umons.babaisyou.gui;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.*;
@@ -25,10 +27,12 @@ public class ServerChoiceScene {
 	
 	private static final Logger LOGGER =  Logger.getGlobal();
 	
+	public static final String SERVER_FOLDER_LOCATION = "servers";
+	
 	/**
 	 * Emplacement du ficher qui contient l'historique de 
 	 */
-	public final static String SERVER_HISTORY_LOCATION = "servers"+File.separator+"history";
+	public final static String SERVER_HISTORY_LOCATION = SERVER_FOLDER_LOCATION+File.separator+"history";
 	
 	private BorderPane serverChoiceLayout;
 	private Scene serverChoiceScene;
@@ -36,6 +40,7 @@ public class ServerChoiceScene {
 	 * Affiche la liste des servers à l'utilisateur
 	 */
 	private ComboBox<String> serverBox;
+	private LinkedList<String> servers;
 	private Stage mainWindow;
 	
 	
@@ -79,14 +84,15 @@ public class ServerChoiceScene {
 		Button playButton = new Button("Connect");
 		playButton.setOnAction(e -> {
 			String serverIp = serverBox.getSelectionModel().getSelectedItem();
-			play(serverIp);
+			if (serverIp != null) {
+				play(serverIp);
+			}
+			
 			
 		});
 		menu.getChildren().add(playButton);
 		
 		serverChoiceLayout.setBottom(menu);
-		
-		
 		
 		//Crée la scène
 		serverChoiceScene = new Scene(serverChoiceLayout,640,640);
@@ -125,6 +131,17 @@ public class ServerChoiceScene {
 		try {
 			LevelPackOnline pack = new LevelPackOnline(ip);
 			LevelScene.getInstance(pack, mainWindow).setLevelPack(pack);
+			// Ajout à l'historique des servers
+			if (!servers.contains(ip)) {
+				try (BufferedWriter buffer = new BufferedWriter(new FileWriter(new File(SERVER_HISTORY_LOCATION), true))) {
+					buffer.append(ip);
+					updateServers();
+				} catch (IOException e) {
+					LOGGER.log(Level.WARNING, "Could not write to history file : " + e.getMessage());
+				}
+			}
+			
+			//Switch la scene
 			mainWindow.setScene(LevelListScene.getInstance(pack, getScene(), mainWindow).getScene());
 			
 		} catch (IOException e) {
@@ -139,7 +156,7 @@ public class ServerChoiceScene {
 	 */
 	private void updateServers() {
 		File history = new File(SERVER_HISTORY_LOCATION);
-		LinkedList<String> servers = new LinkedList<>();
+		servers = new LinkedList<>();
 		if (history.exists()) {
 			try (BufferedReader buffer = new BufferedReader(new FileReader(history))) {
 				String line;
@@ -171,6 +188,31 @@ public class ServerChoiceScene {
 		if (history.exists()) {
 			history.delete();
 		}
+		//Remove folder data
+		File serverFolder = new File(SERVER_FOLDER_LOCATION);
+		for (File folder : serverFolder.listFiles()) {
+			System.out.println(folder.getPath());
+			if (folder.isDirectory()) {
+				delete(folder);
+			}
+		}
+		
 	}
+	
+	/**
+	 * Supprime un dossier non vide récursivement
+	 * @param f le fichier à supprimer
+	 * @throws IOException
+	 * @author erickson
+	 * @see https://stackoverflow.com/questions/779519/delete-directories-recursively-in-java
+	 */
+	private void delete(File f) {
+		  if (f.isDirectory()) {
+		    for (File c : f.listFiles())
+		      delete(c);
+		  }
+		  if (!f.delete())
+		    LOGGER.warning("Failed to delete file: " + f);
+		}
 
 }

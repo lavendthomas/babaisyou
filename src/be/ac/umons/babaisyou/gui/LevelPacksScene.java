@@ -53,10 +53,14 @@ public class LevelPacksScene {
 		
 		Button playButton = new Button("Next");
 		playButton.setOnAction(e -> {
-			String levelPackPath = levelPacksFolder + File.separator +levelPacksView.getSelectionModel().getSelectedItem();
-			LevelPack pack = new LevelPack(levelPackPath);
-			LevelScene.getInstance(pack, stage).setLevelPack(pack);
-			stage.setScene(LevelListScene.getInstance(pack, getScene() ,stage).getScene());
+			String levelName = levelPacksView.getSelectionModel().getSelectedItem();
+			if (levelName != null) {
+				String levelPackPath = levelPacksFolder + File.separator +levelPacksView.getSelectionModel().getSelectedItem();
+				LevelPack pack = new LevelPack(levelPackPath);
+				LevelScene.getInstance(pack, stage).setLevelPack(pack);
+				stage.setScene(LevelListScene.getInstance(pack, getScene() ,stage).getScene());
+			}
+
 			
 		});
 		menu.getChildren().add(playButton);

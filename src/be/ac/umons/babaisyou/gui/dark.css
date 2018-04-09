@@ -1,4 +1,5 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
 .root{
     -fx-background-color: #333333;
     -fx-text-fill: #FFFFFF;
@@ -7,15 +8,43 @@
 	-fx-text-fill: #FFFFFF;
 	-fx-font-size: 16px
 }
-.button{
+.button {
 	-fx-background-color: #292929;
 	-fx-text-fill: #FFFFFF;
 	-fx-font-size: 16px
 }
-.list-view {
+.button:hover {
+	-fx-background-color: #232323;
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 16px
+}
+.button:pressed {
+	-fx-background-color: #434343;
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 16px
+}
+
+.list-cell {
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 16px
+}
+.list-cell:even {
 	-fx-background-color: #292929;
 }
-.combo-box {
+.list-cell:odd {
+	-fx-background-color: #232323;
+}
+.list-cell:selected {
+	-fx-background-color: #434343;
+}
+
+/* 
+.combo-box-base {
 	-fx-background-color: #292929;
+}
+.combo-box .hover {
 	-fx-text-fill: #FFFFFF;
 }
+.combo-box .list-view {
+	-fx-background-color: #292929;
+} */

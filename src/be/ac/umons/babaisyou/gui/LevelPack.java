@@ -78,11 +78,13 @@ public class LevelPack implements ILevelPack {
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			LOGGER.log(java.util.logging.Level.SEVERE, null, e);
 			throw new RuntimeException(e);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			//TODO Prévenir lútilisateur dans le GUI
+			LOGGER.log(java.util.logging.Level.SEVERE, null, e);
 			throw new RuntimeException(e);
 		}
 		levelsList = listOfLevel.toArray(new String[listOfLevel.size()]);

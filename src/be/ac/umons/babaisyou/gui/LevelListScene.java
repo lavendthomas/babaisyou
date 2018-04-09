@@ -54,7 +54,7 @@ public class LevelListScene {
 		playButton.setOnAction(e -> {
 			String levelSelected = levelListView.getSelectionModel().getSelectedItem();
 			//Permettre de jouer au niveau uniquememt si c'est un niveau jouable
-			if (!levelSelected.equals(DEFAULT_NONPLAYABLE_NAME)) {
+			if (levelSelected != null && !DEFAULT_NONPLAYABLE_NAME.equals(levelSelected)) {
 				levels.setFirstLevel(levelSelected);
 				LevelScene.getInstance(levels, stage).setLevelPack(levels);
 				stage.setScene(LevelScene.getInstance(levels, stage).getScene());

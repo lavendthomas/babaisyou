@@ -42,6 +42,12 @@ public class LevelPackOnline implements ILevelPack {
 	 * @throws MalformedURLException 
 	 */
 	public LevelPackOnline(String url) throws MalformedURLException, IOException, FileNotFoundException {
+		//Crée le dossier de servers si il n'existe pas
+		File serversFolder = new File(DEFAULT_SERVER_DATA_LOCATION);
+		if (!serversFolder.exists() || !serversFolder.isDirectory()) {
+			serversFolder.mkdir();
+		}
+		serversFolder = null;
 
 		//On utilise le hash pour éviter les caractères spéciaux.
 		File serverFolder = new File(DEFAULT_SERVER_DATA_LOCATION + File.separator + getFolderHash(url));
