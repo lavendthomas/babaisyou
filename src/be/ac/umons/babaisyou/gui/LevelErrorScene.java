@@ -18,8 +18,8 @@ public class LevelErrorScene {
 			VBox warning = new VBox(10);
 			warning.setAlignment(Pos.CENTER);
 			
-			Label text = new Label("The level you tried to play is either corrupted or doesn't respect"
-					+ "or is not a level file");
+			Label text = new Label("The level you tried to play is either corrupted"
+					+ " or is not a level file");
 			warning.getChildren().add(text);
 			
 			Button backButton = new Button("Return to main titlescreen");
