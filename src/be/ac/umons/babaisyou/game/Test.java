@@ -21,7 +21,8 @@ public class Test {
 		level.set(new Block(BlockType.IS), new Position(0,1));
 		level.set(new Block(BlockType.PUSH), new Position(0,2));
 		level.set(new Block(BlockType.WALL), new Position(0,3));
-		assertTrue(level.hasPushable(new Position(0,3)));
+		assertTrue("Reconnaisance de règle verticale échouée",
+				level.hasPushable(new Position(0,3)));
 		
 	}
 	
@@ -35,7 +36,8 @@ public class Test {
 		level.set(new Block(BlockType.IS), new Position(1,0));
 		level.set(new Block(BlockType.PUSH), new Position(2,0));
 		level.set(new Block(BlockType.WALL), new Position(3,0));
-		assertTrue(level.hasPushable(new Position(3,0)));
+		assertTrue("Reconnaisance de règle horizontale échouée",
+				level.hasPushable(new Position(3,0)));
 		
 	}
 	
@@ -55,11 +57,13 @@ public class Test {
 		//Test si le joueur a bien quitté la cellule de départ.
 		String[] emptyCell = {Block.DEFAULT_TYPE.getId()};
 		
-		assertTrue(Arrays.equals(emptyCell,level.getToId(2,3)));
+		assertTrue("Le joueur n'a pas quitté la cellule de départ",
+				Arrays.equals(emptyCell,level.getToId(2,3)));
 		
 		//Test si le joueur est bien arrivé sur la cellule d'arrivée.
 		String[] nextCell = {BlockType.BABA.getId()};
-		assertTrue(Arrays.equals(level.getToId(3,2), nextCell));
+		assertTrue("Le joueur n'est pas arrivé sur la cellule d'arrivée",
+				Arrays.equals(level.getToId(3,2), nextCell));
 	}
 	
 	/**
@@ -78,11 +82,13 @@ public class Test {
 		level.set(new Block(BlockType.WALL), new Position(2,3));
 		
 		//Teste les faux positifs
-		assertFalse(level.hasWon());
+		assertFalse("Faux positif : le niveau indique erronément qu'il est réussi",
+				level.hasWon());
 		
 		level.move(Direction.DOWN);
 		//Teste que la détection du win
-		assertTrue(level.hasWon());
+		assertTrue("Le niveau devrait être réussi mais ne l'est pas",
+				level.hasWon());
 	}
 	
 	/**
@@ -99,8 +105,8 @@ public class Test {
 		
 		//Teste que le joueur n'aie pas bougé
 		String[] nextCell = {BlockType.BABA.getId()};
-		assertTrue(Arrays.equals(level.getToId(3,3), nextCell));
-		
+		assertTrue("Le joueur a bougé alors qu'il était bloqué par la limite de la carte",
+				Arrays.equals(level.getToId(3,3), nextCell));
 	}
 	
 	/**
@@ -125,13 +131,16 @@ public class Test {
 		String[] emptyCell = {Block.DEFAULT_TYPE.getId()};
 		
 		//Teste que le WALL aie bien été poussé
-		assertTrue(Arrays.equals(level.getToId(2,4), wallCell));
+		assertTrue("Le block n'a pas été poussé",
+				Arrays.equals(level.getToId(2,4), wallCell));
 		
 		//Teste que le BABA se soit bien déplacé
-		assertTrue(Arrays.equals(level.getToId(2,3), babaCell));
+		assertTrue("Le joueur n'a avancé",
+				Arrays.equals(level.getToId(2,3), babaCell));
 		
 		//Teste que le BABA aie bien quitté la case précédente
-		assertTrue(Arrays.equals(level.getToId(2,2), emptyCell));
+		assertTrue("Le joueur n'a pas été supprimé de la case de départ",
+				Arrays.equals(level.getToId(2,2), emptyCell));
 	}
 	
 	/**
@@ -153,13 +162,14 @@ public class Test {
 		
 		String[] babaCell = {BlockType.BABA.getId()};
 		String[] wallCell = {BlockType.WALL.getId()};
-		String[] emptyCell = {Block.DEFAULT_TYPE.getId()};
 		
 		//Teste que le WALL ne se soit pas déplacé
-		assertTrue(Arrays.equals(level.getToId(2,3), wallCell));
+		assertTrue("Le block STOP a été déplacé",
+				Arrays.equals(level.getToId(2,3), wallCell));
 		
 		//Teste que le BABA ne se soit pas déplacé
-		assertTrue(Arrays.equals(level.getToId(2,2), babaCell));
+		assertTrue("Le joueur s'est déplacé alors qu'il était bloqué par un STOP",
+				Arrays.equals(level.getToId(2,2), babaCell));
 	}
 
 }
