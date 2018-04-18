@@ -78,7 +78,16 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="run" depends="build">
+    <target name="Test">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="be.ac.umons.babaisyou.game.Test" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="babaisyou.classpath"/>
+        </junit>
+    </target>
+    <target name="run">
         <java classname="be.ac.umons.babaisyou.gui.Main" failonerror="true" fork="yes">
             <classpath refid="babaisyou.classpath"/>
         </java>
@@ -87,18 +96,9 @@
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
-            <test name="be.ac.umons.babaisyou.game.Tests" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="run.test.classpath"/>
-        </junit>
-    </target>
-    <target name="Test">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
             <test name="be.ac.umons.babaisyou.game.Test" todir="${junit.output.dir}"/>
             <jvmarg line="-ea"/>
-            <classpath refid="babaisyou.classpath"/>
+            <classpath refid="run.test.classpath"/>
         </junit>
     </target>
     <target name="junitreport">
