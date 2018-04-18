@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -148,6 +149,8 @@ public class Level {
 	 */
 	void set(Block block, Position position) {
 		board.set(block, position);
+		updatePlayerList();
+		parseRules();
 	}
 		
 	/**
@@ -910,7 +913,7 @@ public class Level {
 	 * 
 	 * @return une chaîne de charactère.
 	 */
-	private String printRules() {
+	String printRules() {
 		String res = "";
 		for (BlockType key : rules.keySet()) {
 			res += key.toString() + " : ";
@@ -931,13 +934,10 @@ public class Level {
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width; j++) {
 				Position pos = new Position(j,i);
-				Block[] blocks = get(pos);
-				
-				for (Block block : blocks) {
-					res += block.toString();
+				res += Arrays.toString(get(pos));
+				if (j != width-1) {
+					res += "|";
 				}
-				res += "|";
-				//res += this.board.get(pos).toString() + ",";
 			}
 			res += "\n";
 		}
