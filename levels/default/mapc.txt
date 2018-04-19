@@ -75,3 +75,4 @@ baba 6 12
 text_baba 5 16
 is 6 16
 you 7 16
+text_best 3 3

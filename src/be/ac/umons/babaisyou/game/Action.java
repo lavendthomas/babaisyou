@@ -48,4 +48,9 @@ public abstract class Action {
 		//Ne permet pas de pusher si aucune règle l'autorise.
 		return false;
 	}
+	
+	public boolean isBest() {
+		//N'est pas BEST par défaut.
+		return false;
+	}
 }

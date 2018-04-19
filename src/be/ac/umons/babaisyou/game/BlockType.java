@@ -37,6 +37,8 @@ public enum BlockType {
 	SINK("sink", BlockStyle.ACTION, new ActionSink(),  true),
 	KILL("kill", BlockStyle.ACTION, new ActionKill(),  true),
 	MOVE("move", BlockStyle.ACTION, new ActionMove(),  true),
+	TEXT_BEST("text_best", BlockStyle.ACTION, new ActionBest(), true),
+	BEST("best", BlockStyle.ACTION), // Ne doit pas être utilisée dans le jeu en tant que bloc à part entière.
 	
 	;
 	/**

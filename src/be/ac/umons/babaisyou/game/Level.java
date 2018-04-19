@@ -231,13 +231,19 @@ public class Level {
 	 */
 	public String[] getToId(int x,int y) {
 		LinkedList<String> blocks = new LinkedList<String>();
-		for (Block block : board.get(new Position(x,y))) {
+		Position position = new Position(x,y);
+		for (Block block : board.get(position)) {
 			blocks.add(block.getId());
 		}
 		//Si la case est vide alors on ajoute le bloc par défaut (VOID)
 		if (blocks.size() == 0) {
 			blocks.add(Block.DEFAULT_TYPE.getId());
 		}
+		
+		if (hasBest(position)) {
+			blocks.add(BlockType.BEST.getId());
+		}
+		
 		
 		return blocks.toArray(new String[blocks.size()]);
 		
@@ -537,12 +543,29 @@ public class Level {
 	 * @param type Le BlockType à déterminer la propriété.
 	 * @return vrai si le BlockType type a la propriété "Blocking". false sinon.
 	 */
-	private boolean isBlocking(BlockType type) {
+	boolean isBlocking(BlockType type) {
 		if (!rules.containsKey(type)) {
 			return false;
 		}
 		for (Action action : rules.get(type)) {
 			if (action.isBlocking()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Renvoie vrai si le BlockType type a la propriété "BEST"
+	 * @param type Le BlockType à déterminer la propriété.
+	 * @return vrai si le BlockType type a la propriété "BEST". false sinon.
+	 */
+	boolean isBest(BlockType type) {
+		if (!rules.containsKey(type)) {
+			return false;
+		}
+		for (Action action : rules.get(type)) {
+			if (action.isBest()) {
 				return true;
 			}
 		}
@@ -629,6 +652,21 @@ public class Level {
 		}
 		return false;
 	}
+	
+	/**
+	 * Renvoie vrai si un des blocks dans la case a la propriété "BEST"
+	 * @param position La position de la case à analyser
+	 * @return true si un des blocks a la propriété "BEST"
+	 */
+	boolean hasBest(Position position) {
+		for (Block block : get(position)) {
+			if (isBest(block.getType())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * Renvoie vrai si un des blocs à la position mensionnée a un bloc contrôlable par le joueur
