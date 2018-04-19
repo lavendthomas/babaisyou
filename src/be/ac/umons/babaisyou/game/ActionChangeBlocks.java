@@ -1,6 +1,10 @@
 package be.ac.umons.babaisyou.game;
 
-
+/**
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class ActionChangeBlocks extends Action {
 	
 	/**

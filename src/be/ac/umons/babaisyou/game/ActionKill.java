@@ -1,5 +1,13 @@
 package be.ac.umons.babaisyou.game;
 
+/**
+ * Représente la règle KILL.
+ * 
+ * KILL tue chaque joueur qui tombe sur un block qui contient cette règle
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class ActionKill extends Action {
 
 	@Override

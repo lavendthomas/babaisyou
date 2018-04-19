@@ -2,6 +2,8 @@ package be.ac.umons.babaisyou.game;
 
 /**
  * Modélise un block du jeu.
+ * 
+ * Un bloc est composé de un Type de block et une direction par défaut.
  * @author Thomas Lavend'Homme
  *
  */

@@ -16,6 +16,12 @@ import be.ac.umons.babaisyou.exceptions.NotADirectionException;
 import be.ac.umons.babaisyou.exceptions.WrongFileFormatException;
 import be.ac.umons.babaisyou.exceptions.WrongLevelDimensionException;
 
+/**
+ * Représente un niveau.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class Level {
 	
 	/**

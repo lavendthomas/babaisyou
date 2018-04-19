@@ -3,6 +3,14 @@ package be.ac.umons.babaisyou.game;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Représente la règle MOVE.
+ * 
+ * MOVE déplace tout les blocs de ce type vers la direction par défaut de chaque bloc.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class ActionMove extends Action {
 
 	@Override

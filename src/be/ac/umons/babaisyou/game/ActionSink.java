@@ -1,5 +1,13 @@
 package be.ac.umons.babaisyou.game;
 
+/**
+ * Représente la règle SINK.
+ * 
+ * SINK fait disparaître tout les blocs qui se déplacent sur lui puis supprime le bloc ayant la propriété SINK.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class ActionSink extends Action {
 	
 	/**

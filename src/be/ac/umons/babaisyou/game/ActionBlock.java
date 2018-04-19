@@ -1,5 +1,11 @@
 package be.ac.umons.babaisyou.game;
 
+/**
+ * Représente la règle STOP.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class ActionBlock extends Action {
 	
 	@Override
