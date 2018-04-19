@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -64,6 +65,7 @@ public class ControlsScene {
 		//Ajout du tableau de selection des touches
 		Label labelUp = new Label("UP");
 		grid.add(labelUp,0,0);
+		GridPane.setHalignment(labelUp, HPos.RIGHT);
 		Button buttonUp = new Button(up.getName());
 		buttonUp.setOnAction(event -> {
 			buttonUp.setText("...");
@@ -78,6 +80,7 @@ public class ControlsScene {
 		
 		Label labelDown = new Label("DOWN");
 		grid.add(labelDown,0,1);
+		GridPane.setHalignment(labelDown, HPos.RIGHT);
 		Button buttonDown = new Button(down.getName());
 		buttonDown.setOnAction(event -> {
 			buttonDown.setText("...");
@@ -93,6 +96,7 @@ public class ControlsScene {
 		
 		Label labelRight = new Label("RIGHT");
 		grid.add(labelRight,0,2);
+		GridPane.setHalignment(labelRight, HPos.RIGHT);
 		Button buttonRight = new Button(right.getName());
 		buttonRight.setOnAction(event -> {
 			buttonRight.setText("...");
@@ -107,6 +111,7 @@ public class ControlsScene {
 		
 		Label labelLeft = new Label("LEFT");
 		grid.add(labelLeft,0,3);
+		GridPane.setHalignment(labelLeft, HPos.RIGHT);
 		Button ButtonLeft = new Button(left.getName());
 		ButtonLeft.setOnAction(event -> {
 			ButtonLeft.setText("...");
@@ -121,6 +126,7 @@ public class ControlsScene {
 		
 		Label labelRestart = new Label("RESTART");
 		grid.add(labelRestart,0,4);
+		GridPane.setHalignment(labelRestart, HPos.RIGHT);
 		Button ButtonRestart = new Button(restart.getName());
 		ButtonRestart.setOnAction(event -> {
 			ButtonRestart.setText("...");
