@@ -18,6 +18,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+/**
+ * LevelScene génère la scène qui affiche un niveau du jeu.
+ * 
+ * Le niveau à afficher est donné en paramètre lors de l'instanciation
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class LevelScene {
 	
 	private static LevelScene instance;

@@ -21,6 +21,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * ServerChoiceScene génère la scène qui permet de choisir sur quel serveur se connecter.
+ * Permet aussi de supprimer toutes les données du dossier servers.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class ServerChoiceScene {
 	//Singleton
 	private static ServerChoiceScene instance;

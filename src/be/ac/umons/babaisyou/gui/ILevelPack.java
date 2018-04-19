@@ -7,7 +7,8 @@ import be.ac.umons.babaisyou.game.Level;
 /**
  * Représente un pack de niveau (en ligne ou hors ligne)
  * Un pack est composé de order et les niveaux.
- * @author thomas
+ * 
+ * @author Thomas Lavend'Homme
  *
  */
 public interface ILevelPack {

@@ -9,6 +9,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+/**
+ * LevelListScene génère la scène qui liste les niveaux dans un pack de niveau et permet
+ * de jouer à ceux-ci.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class LevelListScene {
 	//Singleton
 	static LevelListScene instance;

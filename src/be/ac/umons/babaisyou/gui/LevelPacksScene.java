@@ -11,7 +11,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-
+/**
+ * LevelPacksScene génère la scène qui liste tous les packs de niveaux et permet d'en choisir un.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class LevelPacksScene {
 	//Singleton
 	private static LevelPacksScene instance;

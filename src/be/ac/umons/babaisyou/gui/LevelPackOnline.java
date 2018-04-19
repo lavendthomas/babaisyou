@@ -19,6 +19,13 @@ import be.ac.umons.babaisyou.exceptions.GamedCompletedException;
 import be.ac.umons.babaisyou.exceptions.WrongFileFormatException;
 import be.ac.umons.babaisyou.game.Level;
 
+/**
+ * Représente un pack de niveau en ligne.
+ * Un pack est composé de order et les niveaux.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class LevelPackOnline implements ILevelPack {
 	
 	/**

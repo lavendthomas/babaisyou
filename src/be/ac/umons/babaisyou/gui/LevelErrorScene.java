@@ -7,6 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * LevelErrorScene génère la scène d'erreur lors du chargement d'un niveau.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class LevelErrorScene {
 	
 	//Singleton

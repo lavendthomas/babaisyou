@@ -6,6 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * MenuScene génère la scène du menu principal du jeu.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class MenuScene {
 	//Singleton
 	private static MenuScene instance;

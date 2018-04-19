@@ -7,6 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * LevelErrorScene génère la scène d'erreur lors de la connection à un serveur ou
+ * si le serveur n'est pas compatible avec le jeu.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class ServerErrorScene {
 	
 	//Singleton

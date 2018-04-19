@@ -19,6 +19,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+/**
+ * ControlsScene génère  la scène qui permet de changer les contrôles.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public class ControlsScene {
 	//Singleton
 	private static ControlsScene instance;
