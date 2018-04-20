@@ -1,6 +1,7 @@
 package be.ac.umons.babaisyou.gui;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -59,6 +60,7 @@ public class LevelScene {
 			+ File.separator;
 	
 	public static final String DELFAUT_IMAGE_EXTENSION = ".png";
+	public static final String ALTERNATE_IMAGE_EXTENSION = ".gif";
 	
 	
 	private LevelScene(ILevelPack levels, String firstLevel, Stage stage) {
@@ -68,7 +70,16 @@ public class LevelScene {
 		//Charger toutes les images.
 		images = new HashMap<String, Image>();
 		for(BlockType type : BlockType.values()) {
-			Image image = new Image(DELFAUT_IMAGE_LOCATION + type.getId() + DELFAUT_IMAGE_EXTENSION);
+			Image image;
+			try {
+				File img = new File(DELFAUT_IMAGE_LOCATION + type.getId() + DELFAUT_IMAGE_EXTENSION);
+				img.exists();
+				image = new Image(DELFAUT_IMAGE_LOCATION + type.getId() + DELFAUT_IMAGE_EXTENSION);
+			} catch (IllegalArgumentException e) {
+				System.out.println(DELFAUT_IMAGE_LOCATION + type.getId() + ALTERNATE_IMAGE_EXTENSION);
+				image = new Image(DELFAUT_IMAGE_LOCATION + type.getId() + ALTERNATE_IMAGE_EXTENSION);
+			}
+			
 			images.put(type.getId(), image);
 		}
 		this.levels = levels;

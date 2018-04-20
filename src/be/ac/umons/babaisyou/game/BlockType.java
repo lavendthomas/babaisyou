@@ -15,6 +15,7 @@ public enum BlockType {
 	METAL("metal", BlockStyle.MATERIAL),
 	SKULL("skull", BlockStyle.MATERIAL),
 	MONSTER("monster", BlockStyle.MATERIAL),
+	BEST("best", BlockStyle.MATERIAL), // Ne doit pas être utilisée dans le jeu en tant que bloc à part entière.
 	
 	//SELECTEURS
 	IS("is", BlockStyle.IS, true),
@@ -38,7 +39,6 @@ public enum BlockType {
 	KILL("kill", BlockStyle.ACTION, new ActionKill(),  true),
 	MOVE("move", BlockStyle.ACTION, new ActionMove(),  true),
 	TEXT_BEST("text_best", BlockStyle.ACTION, new ActionBest(), true),
-	BEST("best", BlockStyle.ACTION), // Ne doit pas être utilisée dans le jeu en tant que bloc à part entière.
 	
 	;
 	/**
