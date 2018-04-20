@@ -59,6 +59,9 @@ public class Board {
 	
 	public Block pop(BlockType type, Position position) {
 		for (Block block : get(position)) {
+			if (block == null) {
+				return null;
+			}
 			if (block.getType() == type) {
 				board[position.getY()][position.getX()].remove(block);
 				return block;
