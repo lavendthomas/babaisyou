@@ -12,7 +12,12 @@ public enum Sounds {
 	private boolean playing;
 	MediaPlayer mediaplayer;
 	
-	public static final String DELFAUT_SOUNDS_LOCATION = "/home/thomas/Documents/Workspace/babaisyou/src/be/ac/umons/babaisyou/ressources/sounds/" + File.separator;
+	public static File currentDirectory = new File("");
+	
+	public static final String DELFAUT_SOUNDS_LOCATION = currentDirectory.getAbsolutePath()
+			+ File.separator + "src" + File.separator
+			+ "be" + File.separator +"ac"+File.separator+"umons"+File.separator
+			+ "babaisyou" + File.separator + "ressources"+ File.separator + "sounds" + File.separator;
 	
 	private Sounds(String path) {
 		this.path = path;
