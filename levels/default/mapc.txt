@@ -75,4 +75,10 @@ baba 6 12
 text_baba 5 16
 is 6 16
 you 7 16
+text_grass 9 16
+is 10 16
+melt 11 16
+text_baba 16 11
+is 16 12
+hot 16 13
 text_best 3 3

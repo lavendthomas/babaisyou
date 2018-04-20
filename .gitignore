@@ -43,5 +43,7 @@ hs_err_pid*
 *.db
 >>>>>>> 6fdc2ce5c9468ec2093e5fbd142f31c5fd0e170b
 *.1
+*.2
+*.3
 *.db
 *.properties

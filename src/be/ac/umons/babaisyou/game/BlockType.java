@@ -29,15 +29,18 @@ public enum BlockType {
 	TEXT_METAL("text_metal", BlockStyle.SELECTOR, true),
 	TEXT_SKULL("text_skull", BlockStyle.SELECTOR, true),
 	TEXT_MONSTER("text_monster", BlockStyle.SELECTOR, true),
+	TEXT_GRASS("text_grass", BlockStyle.SELECTOR, true),
 	
 	//ACTION
 	WIN("win", BlockStyle.ACTION, new ActionWin(), true),
 	STOP("stop", BlockStyle.ACTION, new ActionBlocking(), true),
 	PUSH("push", BlockStyle.ACTION, new ActionPush(), true),
-	YOU("you", BlockStyle.ACTION, new ActionPush(),  true),
+	YOU("you", BlockStyle.ACTION, new ActionNull(),  true),
 	SINK("sink", BlockStyle.ACTION, new ActionSink(),  true),
 	KILL("kill", BlockStyle.ACTION, new ActionKill(),  true),
 	MOVE("move", BlockStyle.ACTION, new ActionMove(),  true),
+	HOT("hot", BlockStyle.ACTION, new ActionHot(),  true),
+	MELT("melt", BlockStyle.ACTION, new ActionMelt(),  true),
 	TEXT_BEST("text_best", BlockStyle.ACTION, new ActionBest(), true),
 	
 	;

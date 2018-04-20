@@ -506,7 +506,6 @@ public class Level {
 	 * @param block2 Le BlockType du bloc en bas ou à droite du is
 	 */
 	private void addRule(BlockType block1, BlockType block2) {
-		
 		Action action;
 		/*
 		 * 1. Cas ou il faut transformer un block en un autre
@@ -522,11 +521,11 @@ public class Level {
 			
 		}
 		/*
-		 * 2. Cas un l'action doit être exécutée ssi le joueur est sur la case.
+		 * 2. Cas un l'action doit être exécutée si le joueur est sur la case.
 		 */
 		else if (block1.isSelector() && block2.isAction()) {
 			action = block2.getAction();
-			if (rules.get(block1) == null) {
+			if (rules.get(block1.getSelection()) == null) {
 				List<Action> newList = new ArrayList<Action>() ;
 				newList.add(action);
 				rules.put(block1.getSelection(), newList);
@@ -566,6 +565,23 @@ public class Level {
 		}
 		for (Action action : rules.get(type)) {
 			if (action.isBest()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Renvoie vrai si le BlockType type a la propriété "HOT"
+	 * @param type Le BlockType à déterminer la propriété.
+	 * @return vrai si le BlockType type a la propriété "HOT". false sinon.
+	 */
+	boolean isHot(BlockType type) {
+		if (!rules.containsKey(type)) {
+			return false;
+		}
+		for (Action action : rules.get(type)) {
+			if (action.isHot()) {
 				return true;
 			}
 		}

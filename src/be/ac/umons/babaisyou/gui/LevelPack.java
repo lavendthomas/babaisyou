@@ -84,12 +84,10 @@ public class LevelPack implements ILevelPack {
 				listOfLevel.add(line);
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			LOGGER.log(java.util.logging.Level.SEVERE, null, e);
 			throw new RuntimeException(e);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			//TODO Prévenir lútilisateur dans le GUI
 			LOGGER.log(java.util.logging.Level.SEVERE, null, e);
 			throw new RuntimeException(e);
@@ -170,8 +168,6 @@ public class LevelPack implements ILevelPack {
 				}
 			}
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			//e1.printStackTrace();
 			LOGGER.log(java.util.logging.Level.SEVERE, "Problem occured while saving last played Level", e1);
 			throw new RuntimeException(e1);
 		}

@@ -53,4 +53,9 @@ public abstract class Action {
 		//N'est pas BEST par défaut.
 		return false;
 	}
+	
+	public boolean isHot() {
+		//N'est pas HOT par défaut.
+		return false;
+	}
 }
