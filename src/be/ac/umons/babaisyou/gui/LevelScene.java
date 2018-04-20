@@ -76,7 +76,6 @@ public class LevelScene {
 				img.exists();
 				image = new Image(DELFAUT_IMAGE_LOCATION + type.getId() + DELFAUT_IMAGE_EXTENSION);
 			} catch (IllegalArgumentException e) {
-				System.out.println(DELFAUT_IMAGE_LOCATION + type.getId() + ALTERNATE_IMAGE_EXTENSION);
 				image = new Image(DELFAUT_IMAGE_LOCATION + type.getId() + ALTERNATE_IMAGE_EXTENSION);
 			}
 			

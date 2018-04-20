@@ -11,8 +11,10 @@
 .button {
 	-fx-background-color: #292929;
 	-fx-text-fill: #FFFFFF;
-	-fx-font-size: 16px
+	-fx-font-size: 16px;
+	-fx-min-width: 120
 }
+
 .button:hover {
 	-fx-background-color: #232323;
 	-fx-text-fill: #FFFFFF;
