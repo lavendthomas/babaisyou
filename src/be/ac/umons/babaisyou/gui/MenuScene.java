@@ -30,7 +30,7 @@ public class MenuScene {
 		onlineButton.setOnAction(e -> stage.setScene(ServerChoiceScene.getInstance(stage).getScene()));
 		menuLayout.getChildren().add(onlineButton);
 		
-		Button controlsButton = new Button("Controls");
+		Button controlsButton = new Button("Settings");
 		controlsButton.setOnAction(e -> stage.setScene(ControlsScene.getInstance(stage).getScene()));
 		menuLayout.getChildren().add(controlsButton);
 		
@@ -61,6 +61,7 @@ public class MenuScene {
 	 * @return
 	 */
 	public Scene getScene() {
+		LevelScene.deleteInstance();
 		return menuScene;
 	}
 }

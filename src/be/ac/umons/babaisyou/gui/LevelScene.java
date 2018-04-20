@@ -1,10 +1,8 @@
 package be.ac.umons.babaisyou.gui;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Logger;
-
 import be.ac.umons.babaisyou.game.Level;
 import be.ac.umons.babaisyou.exceptions.GamedCompletedException;
 import be.ac.umons.babaisyou.exceptions.WrongFileFormatException;
@@ -198,6 +196,13 @@ public class LevelScene {
 		} else {
 			return instance;
 		}
+	}
+	
+	/**
+	 * Permet de supprimer l'instance pour libérer de la mémoire.
+	 */
+	public static void deleteInstance() {
+		instance = null;
 	}
 	
 	

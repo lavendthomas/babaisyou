@@ -90,6 +90,7 @@ public class LevelPacksScene {
 			return instance;
 		}
 	}
+
 	
 	/**
 	 * Renvoie la scène qui affiche la liste de tous les packs de niveaux.

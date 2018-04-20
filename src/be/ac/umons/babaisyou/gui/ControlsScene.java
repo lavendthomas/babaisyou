@@ -18,6 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -34,11 +35,15 @@ public class ControlsScene {
 	
 	private final static String CONFIG_FILE = "config.txt";
 	
+	private final static String MUSIC = "music";
+	
 	private final static String KEY_UP = "key_up";
 	private final static String KEY_DOWN = "key_down";
 	private final static String KEY_LEFT = "key_left";
 	private final static String KEY_RIGHT = "key_right";
 	private final static String KEY_RESTART = "key_reload";
+	
+	public static boolean musicOn = getMusicState();
 	
 	public static KeyCode up = getUp();
 	public static KeyCode down = getDown();
@@ -55,10 +60,36 @@ public class ControlsScene {
 		contolsLayout = new BorderPane();
 		contolsLayout.setPadding(new Insets(25, 25, 25, 25));
 		
+		VBox settings = new VBox();
+		settings.setAlignment(Pos.CENTER);
+		settings.setSpacing(20);
+		contolsLayout.setCenter(settings);
+		
+		Label soundLabel = new Label("Sound Settings");
+		settings.getChildren().add(soundLabel);
+		HBox musicOnOff = new HBox();
+		musicOnOff.setAlignment(Pos.CENTER);
+		musicOnOff.setSpacing(20);
+		musicOnOff.getChildren().add(new Label("Music"));
+		Button buttonMusicOnOff = new Button(stateToName(getMusicState()));
+		buttonMusicOnOff.setOnAction(event -> {
+			boolean newState = !nameToState(buttonMusicOnOff.getText());
+			buttonMusicOnOff.setText(stateToName(newState));
+			musicOn = newState;
+			SoundPlayer.getInstance().play(Sounds.BACKGOUND);
+			saveKeyConfig();
+			
+		});
+		musicOnOff.getChildren().add(buttonMusicOnOff);
+		settings.getChildren().add(musicOnOff);
+		
+		
+		Label keyboardLabel = new Label("Keyboard Settings");
+		settings.getChildren().add(keyboardLabel);
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
-		contolsLayout.setCenter(grid);
+		settings.getChildren().add(grid);
 		grid.setHgap(20);
 		grid.setVgap(20);
 		
@@ -133,8 +164,8 @@ public class ControlsScene {
 			controlsScene.setOnKeyPressed(key-> {
 				restart = key.getCode();
 				ButtonRestart.setText(restart.getName());
-				saveKeyConfig();
 				key.consume();
+				saveKeyConfig();
 			});
 		});
 		grid.add(ButtonRestart,1,4);
@@ -160,6 +191,40 @@ public class ControlsScene {
 
 	}
 	
+	private static String stateToName(boolean state) {
+		if (state) {
+			return "ON";
+		} else {
+			return "OFF";
+		}
+	}
+	
+	private static boolean nameToState(String state) {
+		switch (state) {
+		case "ON" : 
+			return true; 
+		case "OFF": 
+			return false; 
+		default :
+			LOGGER.warning("Unable to load value from music file");
+			return true;
+		}
+	}
+	
+	private static boolean getMusicState() {
+		try (BufferedReader buffer = new BufferedReader(new FileReader(CONFIG_FILE))) {
+			String line;
+			while ((line = buffer.readLine()) != null) {
+				String[] splitLine = line.split(":");
+				if (splitLine[0].equals(MUSIC) && splitLine.length == 2) {
+					return nameToState(splitLine[1]) ;
+				}
+			}
+		} catch (IOException e) {
+			return true;
+		}
+		return true;
+	}
 	
 	
 	/**
@@ -182,6 +247,7 @@ public class ControlsScene {
 	private static void saveKeyConfig() {
 		
 		try (BufferedWriter buffer = new BufferedWriter(new FileWriter(CONFIG_FILE, false))) {
+			buffer.write(MUSIC + ":" + stateToName(musicOn) + "\n");
 			buffer.write(KEY_UP + ":" + up.getName() + "\n");
 			buffer.write(KEY_DOWN + ":" + down.getName() + "\n");
 			buffer.write(KEY_LEFT + ":" + left.getName() + "\n");

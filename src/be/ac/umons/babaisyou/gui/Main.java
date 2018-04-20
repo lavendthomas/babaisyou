@@ -59,6 +59,9 @@ public class Main extends Application {
 			window.setTitle("Baba is you");
 			window.setOnCloseRequest(e -> closeProgram());
 			window.show();
+			
+			SoundPlayer soundplayer = SoundPlayer.getInstance();
+			soundplayer.play(Sounds.BACKGOUND);
 
 			
 			 
