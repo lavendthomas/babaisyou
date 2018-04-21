@@ -27,6 +27,7 @@ public class ServerErrorScene {
 		
 		Label text = new Label("The server you tried to connect is not availible or isn't compatible with this game.\n"
 				+ "Please check your connection or contact the server administrator.");
+		text.setWrapText(true);
 		warning.getChildren().add(text);
 		
 		Button backButton = new Button("Return to main titlescreen");

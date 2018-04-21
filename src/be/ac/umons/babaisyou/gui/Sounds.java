@@ -7,7 +7,8 @@ import javafx.scene.media.MediaPlayer;
 public enum Sounds {
 	
 	BACKGOUND("background.wav"),
-	WIN("win.wav");
+	WIN("win.wav"),
+	ACHIEVEMENT("achievement.wav");
 	
 	private String path;
 	private boolean playing;

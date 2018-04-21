@@ -75,6 +75,11 @@ public class Level {
 	private HashMap<BlockType, List<Action>> rules;
 	
 	/**
+	 * Gère les succès.
+	 */
+	private Achievement achievement;
+	
+	/**
 	 * Crée un niveau vide
 	 * @param width la largeur du niveau
 	 * @param height la hauteur du niveau
@@ -82,6 +87,7 @@ public class Level {
 	 */
 	public Level(int width, int height) {
 		levelName = DEFAULT_LEVEL_NAME;
+		achievement = Achievement.getInstance();
 		
 		this.height = height;
 		this.width = width;
@@ -125,6 +131,13 @@ public class Level {
 	 */
 	public int getWidth() {
 		return width;
+	}
+	
+	/**
+	 * Renvoie l'entité de gestion de succès.
+	 */
+	public Achievement getAchievement() {
+		return achievement;
 	}
 	
 	/**
@@ -225,6 +238,7 @@ public class Level {
 	 * @param hasWon
 	 */
 	void setWon(boolean hasWon) {
+		achievement.onWin();
 		this.hasWon = hasWon;
 	}
 	
@@ -278,6 +292,7 @@ public class Level {
 		}
 		
 		if (canmove) {
+			achievement.onMove();
 			for (BlockType type : playerTypes) {
 				for (Position position : playerPositions.get(type)) {
 					
@@ -940,6 +955,13 @@ public class Level {
 	 */
 	public void save() throws IOException {
 		save(levelName);
+	}
+	
+	/**
+	 * Sauvegarde les données associées au niveau, dont les achivements
+	 */
+	public void flush() {
+		achievement.save();
 	}
 	
 	/**

@@ -26,6 +26,7 @@ public class LevelErrorScene {
 			
 			Label text = new Label("The level you tried to play is either corrupted"
 					+ " or is not a level file");
+			text.setWrapText(true);
 			warning.getChildren().add(text);
 			
 			Button backButton = new Button("Return to main titlescreen");

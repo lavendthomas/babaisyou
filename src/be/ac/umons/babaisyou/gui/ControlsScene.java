@@ -76,7 +76,7 @@ public class ControlsScene {
 			boolean newState = !nameToState(buttonMusicOnOff.getText());
 			buttonMusicOnOff.setText(stateToName(newState));
 			musicOn = newState;
-			SoundPlayer.getInstance().play(Sounds.BACKGOUND);
+			SoundPlayer.getInstance().play(Sounds.BACKGOUND, true);
 			saveKeyConfig();
 			
 		});

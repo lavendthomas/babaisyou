@@ -15,6 +15,7 @@ public class ActionKill extends Action {
 		// TODO Auto-generated method stub
 		
 		while (level.hasPlayer(player_position)) {
+			level.getAchievement().onDeath();
 			level.popPlayer(player_position);
 		}
 		

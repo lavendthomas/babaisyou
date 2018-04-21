@@ -8,6 +8,9 @@
 	-fx-text-fill: #FFFFFF;
 	-fx-font-size: 16px
 }
+.label-achievement{
+	-fx-font-size: 48px
+}
 .button {
 	-fx-background-color: #292929;
 	-fx-text-fill: #FFFFFF;
