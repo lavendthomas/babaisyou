@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
+
 import be.ac.umons.babaisyou.exceptions.NotADirectionException;
 import be.ac.umons.babaisyou.exceptions.WrongFileFormatException;
 import be.ac.umons.babaisyou.exceptions.WrongLevelDimensionException;
@@ -23,6 +25,8 @@ import be.ac.umons.babaisyou.exceptions.WrongLevelDimensionException;
  *
  */
 public class Level {
+	
+	private static final Logger LOGGER =  Logger.getGlobal();
 	
 	/**
 	 * Nom du niveau. (par défaut le nom du fichier)
@@ -839,12 +843,9 @@ public class Level {
 	 * 
 	 * @param file le fichier à charger
 	 * @return Un niveau d'après le fichier
-	 * @throws WrongLevelDimensionException
-	 * @throws FileNotFoundException
-	 * @throws IOException
 	 * @throws WrongFileFormatException si le fichier ne correpond pas à la norme çi-dessus.
 	 */
-	public static Level load(File file) throws WrongFileFormatException, WrongLevelDimensionException, FileNotFoundException, IOException {
+	public static Level load(File file) throws WrongFileFormatException {
 		
 		try (BufferedReader buffer = new BufferedReader(new FileReader(file))) {
 			
@@ -873,6 +874,10 @@ public class Level {
 			int dir;
 			
 			while ((line = buffer.readLine()) != null) { //null si le fichier est vide.
+				if (line.length() == 0) {
+					//Passer les lignes blanches
+					continue;
+				}
 				
 				String[] splitLine = line.split(" ");
 				
@@ -912,8 +917,10 @@ public class Level {
 			level.updatePlayerList();
 			level.parseRules(); 	//ajout des règles
 			return level;
-		} 
-		//throw new WrongFileFormatException();
+		} catch (Exception  e1) {
+			LOGGER.warning(file.getName() +" coun't be loaded." + e1.getMessage());
+			throw new WrongFileFormatException(e1);
+		}
 	}
 	
 	/**
@@ -939,8 +946,6 @@ public class Level {
 	 * Sauvegarde dans un fichier texte comme précisé dans la méthode Level.load() .
 	 * @param filename le chemin d'accès du fichier à charger
 	 * @return Un niveau d'après le fichier
-	 * @throws WrongLevelDimensionException
-	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws WrongFileFormatException si le fichier ne correpond pas à la norme çi-dessus.
 	 */

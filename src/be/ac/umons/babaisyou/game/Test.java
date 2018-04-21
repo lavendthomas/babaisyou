@@ -2,7 +2,13 @@ package be.ac.umons.babaisyou.game;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
+
+import be.ac.umons.babaisyou.exceptions.WrongFileFormatException;
 
 /**
  * Classe comprenant des tests unitaires
@@ -197,6 +203,36 @@ public class Test {
 		//Teste que le BABA ne se soit pas déplacé
 		assertTrue("Le joueur s'est déplacé alors qu'il était bloqué par un STOP",
 				Arrays.equals(level.getToId(2,2), babaCell));
+	}
+	
+	/**
+	 * S'assure que charger un fichier de niveau de cause pas un crash.
+	 * 
+	 * Toutes des exceptions WrongFileFormatException doivent être rattrapées par l'interface graphique et
+	 * donc ne posent pas problème.
+	 */
+	@org.junit.Test
+	public void testLevelLoadingFromFile() {
+		File testFile = new File("tmp");
+		
+		//Écris un fichier de niveau invalide
+		try (BufferedWriter buffer = new BufferedWriter(new FileWriter(testFile))) {
+			buffer.write("5 5\n");
+			buffer.write("baba 2 4\n");
+			buffer.write("notACorrectFile\n");
+			buffer.write("is 4 4\n");
+		} catch (IOException e) {
+			assertTrue("Le fichier correspondant au niveau n'as pas pu être écrit.", false);
+		}
+		
+		try {
+			Level level = Level.load(testFile);
+			assertFalse("Le niveau a été chargé sur un fichier corrompu", true);
+		} catch (WrongFileFormatException e) {
+			//État normal
+		}
+		testFile.delete();
+		
 	}
 
 }
