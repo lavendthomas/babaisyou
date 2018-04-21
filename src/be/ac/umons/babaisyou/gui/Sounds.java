@@ -6,7 +6,8 @@ import javafx.scene.media.MediaPlayer;
 
 public enum Sounds {
 	
-	BACKGOUND("background.aiff");
+	BACKGOUND("background.wav"),
+	WIN("win.wav");
 	
 	private String path;
 	private boolean playing;
@@ -29,13 +30,28 @@ public enum Sounds {
 		return sound.toURI().toString();
 	}
 	
-	public void play() {
+	/**
+	 * Lance le son
+	 * @param repeat Si le son recommence une fois terminé
+	 */
+	public void play(boolean repeat) {
 		mediaplayer = new MediaPlayer(new Media(getURI()));
-		mediaplayer.setCycleCount(MediaPlayer.INDEFINITE);
+		if (repeat) {
+			mediaplayer.setCycleCount(MediaPlayer.INDEFINITE);
+		}
 		mediaplayer.play();
 		playing = true;
 	}
+	/**
+	 * Lance le son
+	 */
+	public void play() {
+		play(false);
+	}
 	
+	/**
+	 * Coupe le son.
+	 */
 	public void stop() {
 		if (playing) {
 			mediaplayer.stop();
@@ -43,6 +59,13 @@ public enum Sounds {
 			playing = false;
 		}
 
+	}
+	
+	public void restart() {
+		if (playing) {
+			mediaplayer.stop();
+			mediaplayer.play();
+		}
 	}
 	
 	public void setPlaying(boolean status) {

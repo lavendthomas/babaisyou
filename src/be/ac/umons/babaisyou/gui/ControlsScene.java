@@ -206,7 +206,7 @@ public class ControlsScene {
 		case "OFF": 
 			return false; 
 		default :
-			LOGGER.warning("Unable to load value from music file");
+			LOGGER.info("Could not load data from config file.");
 			return true;
 		}
 	}
@@ -285,6 +285,7 @@ public class ControlsScene {
 				}
 			}
 		} catch (IOException e) {
+			LOGGER.info("Could not load data from config : " + e.getMessage());
 			return KeyCode.UP;
 		}
 		return KeyCode.UP;
@@ -300,6 +301,7 @@ public class ControlsScene {
 				}
 			}
 		} catch (IOException e) {
+			LOGGER.info("Could not load data from config : " + e.getMessage());
 			return KeyCode.DOWN;
 		}
 		return KeyCode.DOWN;
@@ -314,6 +316,7 @@ public class ControlsScene {
 				}
 			}
 		} catch (IOException e) {
+			LOGGER.info("Could not load data from config : " + e.getMessage());
 			return KeyCode.LEFT;
 		}
 		return KeyCode.LEFT;
@@ -328,6 +331,7 @@ public class ControlsScene {
 				}
 			}
 		} catch (IOException e) {
+			LOGGER.info("Could not load data from config : " + e.getMessage());
 			return KeyCode.RIGHT;
 		}
 		return KeyCode.RIGHT;
@@ -342,6 +346,7 @@ public class ControlsScene {
 				}
 			}
 		} catch (IOException e) {
+			LOGGER.info("Could not load data from config : " + e.getMessage());
 			return KeyCode.R;
 		}
 		return KeyCode.R;

@@ -149,6 +149,7 @@ public class LevelScene {
 			}
 
 			if (level.hasWon()) {
+				SoundPlayer.getInstance().play(Sounds.WIN);
 				try {
 					levels.nextLevel();
 				} catch (GamedCompletedException e1) {

@@ -11,16 +11,27 @@ public class SoundPlayer {
 	/**
 	 * Lance le son.
 	 * @param sound
+	 * @param repeat Si le son recommence une fois terminé
 	 */
-	public void play(Sounds sound) {
+	public void play(Sounds sound, boolean repeat) {
 		if (ControlsScene.musicOn) {
 			if (!sound.isPlaying()) {
-				sound.play();
+				sound.play(repeat);
+			} else {
+				sound.restart();
 			}
 		} else {
 			stopAll();
 		}
 		
+	}
+	
+	/**
+	 * Lance le son sans répétition.
+	 * @param sound
+	 */
+	public void play(Sounds sound) {
+		play(sound, false);
 	}
 	
 	/**

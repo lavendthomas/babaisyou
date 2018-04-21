@@ -61,7 +61,7 @@ public class Main extends Application {
 			window.show();
 			
 			SoundPlayer soundplayer = SoundPlayer.getInstance();
-			soundplayer.play(Sounds.BACKGOUND);
+			soundplayer.play(Sounds.BACKGOUND, true);
 
 			
 			 
