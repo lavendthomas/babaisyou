@@ -256,10 +256,10 @@ public class Level {
 	 * @param direction La direction dans laquelle déplacer les joueurs
 	 */
 	public void move(Direction direction) {
-		
 		// Ne rien déplacer si il n'y a pas de joueurs
 		// Ou pas de IS YOU ou aucun bloc correspodant sur la carte
 		if (playerTypes.size() == 0 || playerPositions.size() == 0) {
+			executeGlobalActions();
 			return;
 		}
 		
@@ -298,20 +298,25 @@ public class Level {
 				}
 			}
 		}
-
-		/*
-		 * Execute les regles globales
-		 */
+		executeGlobalActions();
+	}
+	
+	/*
+	 * Execute les regles globales
+	 */
+	private void executeGlobalActions() {
+		updatePlayerList();
+		parseRules();
+		
 		for (BlockType type : rules.keySet()) {
 			for (Action rule : rules.get(type)) {
 				rule.onEachTour(type);
 			}
 		}
-		
 		updatePlayerList();
 		parseRules();
-		
 	}
+	
 	
 	/**
 	 * Pousse le bloc dans une direction donnée si possible.
@@ -724,7 +729,7 @@ public class Level {
 	 */
 	private void updatePlayerList() {
 		
-		playerPositions = new HashMap<>();
+		playerPositions = new HashMap<>(1);
 		playerTypes = new LinkedList<BlockType>();
 		
 		for (int y=0; y<height; y++) {
@@ -736,39 +741,38 @@ public class Level {
 					if (block.getType() == BlockType.IS) {
 						//Chercher si TEXT_YOU est autour du is.
 						
-						//Si IS en bas ou à droite : arrêter de charcher
-						if ( !isInLevel(new Position(x+1, y)) || !isInLevel(new Position(x, y+1)) ) {
-							continue;
-						}
-						
-						
-						//Gauche et droite
-						for (Block right : board.get(x+1, y)) {
-							if (right.getType() == BlockType.YOU) {
-								//Supprimer du board et ajouter au joueur
-								BlockType newPlayerType;
-								
-								for(Block left : board.get(x-1, y)) {
-									if (left.isSelector()) {
-										newPlayerType = left.getType().getSelection();
-										addPlayerPostionFomType(newPlayerType);
-										playerTypes.add(newPlayerType);
+						// Faire gauche-droite uniquement si IS n'est pas sur un bord gauche ou droite.
+						if (isInLevel(new Position(x+1, y)) && isInLevel(new Position(x-1, y))) {
+							//Gauche et droite
+							for (Block right : board.get(x+1, y)) {
+								if (right.getType() == BlockType.YOU) {
+									//Supprimer du board et ajouter au joueur
+									BlockType newPlayerType;
+									
+									for(Block left : board.get(x-1, y)) {
+										if (left.isSelector()) {
+											newPlayerType = left.getType().getSelection();
+											addPlayerPostionFomType(newPlayerType);
+											playerTypes.add(newPlayerType);
+										}
 									}
 								}
 							}
 						}
-
-						//Haut et bas
-						for (Block down : board.get(x, y+1)) {
-							if (down.getType() == BlockType.YOU) {
-								//Supprimer du board et ajouter au joueur
-								BlockType newPlayerType;
-								
-								for(Block left : board.get(x, y-1)) {
-									if (left.isSelector()) {
-										newPlayerType = left.getType().getSelection();
-										addPlayerPostionFomType(newPlayerType);
-										playerTypes.add(newPlayerType);
+						// Faire haut-bas uniquement si IS n'est pas sur un bord haut ou bas.
+						if (isInLevel(new Position(x, y+1)) && isInLevel(new Position(x, y-1))) {
+							//Haut et bas
+							for (Block down : board.get(x, y+1)) {
+								if (down.getType() == BlockType.YOU) {
+									//Supprimer du board et ajouter au joueur
+									BlockType newPlayerType;
+									
+									for(Block left : board.get(x, y-1)) {
+										if (left.isSelector()) {
+											newPlayerType = left.getType().getSelection();
+											addPlayerPostionFomType(newPlayerType);
+											playerTypes.add(newPlayerType);
+										}
 									}
 								}
 							}

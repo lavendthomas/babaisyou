@@ -26,6 +26,33 @@ public class Test {
 		
 	}
 	
+	@org.junit.Test
+	public void testRecognitionRuleOnMove() {
+		Level level = new Level(4,4);
+		level.set(new Block(BlockType.BABA), new Position(0,1));
+		level.set(new Block(BlockType.WALL), new Position(3,3));
+		level.set(new Block(BlockType.TEXT_BABA), new Position(0,3));
+		level.set(new Block(BlockType.IS), new Position(1,3));
+		level.set(new Block(BlockType.YOU), new Position(2,3));
+		level.set(new Block(BlockType.TEXT_WALL), new Position(1,0));
+		level.set(new Block(BlockType.IS), new Position(1,1));
+		level.set(new Block(BlockType.PUSH), new Position(1,2));
+		assertTrue("La reconnaissance de règle avant déplacement à échouée",
+				level.hasPushable(new Position(3,3)));
+		level.move(Direction.RIGHT);
+		assertFalse("La reconnaissance de règle après cassage à échouée : toujours présente",
+				level.hasPushable(new Position(3,3)));
+		level.move(Direction.LEFT);
+		level.move(Direction.UP);
+		level.move(Direction.RIGHT);
+		level.move(Direction.LEFT);
+		level.move(Direction.DOWN);
+		level.move(Direction.DOWN);
+		level.move(Direction.RIGHT);
+		assertTrue("La reconnaissance de règle après la création d'une règle à échouée",
+				level.hasPushable(new Position(3,3)));
+	}
+	
 	/**
 	 * Vérifie que la reconnaissance de règle se fasse correctement horizontale.
 	 */
