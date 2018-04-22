@@ -281,11 +281,11 @@ public class Level {
 			return;
 		}
 		
-		boolean canmove = true;
+		boolean canmove = false;
 		for (BlockType type : playerTypes) {
 			for (Position pos : playerPositions.get(type)) {
-				if (!canMove(pos, direction)) {
-					canmove = false;
+				if (canMove(pos, direction)) {
+					canmove = true;
 					break;
 				}
 			}
