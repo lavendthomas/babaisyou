@@ -23,19 +23,23 @@ public class MenuScene {
 		menuLayout.setAlignment(Pos.CENTER);
 		
 		Button levelsButton = new Button("Play");
+		levelsButton.getStyleClass().add("button-mainmenu");
 		levelsButton.setOnAction(e -> stage.setScene(LevelPacksScene.getInstance(stage).getScene()));
 		menuLayout.getChildren().add(levelsButton);
 		
 		Button onlineButton = new Button("Play Online");
+		onlineButton.getStyleClass().add("button-mainmenu");
 		onlineButton.setOnAction(e -> stage.setScene(ServerChoiceScene.getInstance(stage).getScene()));
 		menuLayout.getChildren().add(onlineButton);
 		
 		Button controlsButton = new Button("Settings");
+		controlsButton.getStyleClass().add("button-mainmenu");
 		controlsButton.setOnAction(e -> stage.setScene(ControlsScene.getInstance(stage).getScene()));
 		menuLayout.getChildren().add(controlsButton);
 		
 		
 		Button quitButton = new Button("Quit");
+		quitButton.getStyleClass().add("button-mainmenu");
 		quitButton.setOnAction(e -> stage.close());
 		menuLayout.getChildren().add(quitButton);
 		
