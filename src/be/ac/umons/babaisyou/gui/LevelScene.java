@@ -43,7 +43,9 @@ public class LevelScene {
 	
 	private static LevelScene instance;
 	
-	private static final Logger LOGGER =  Logger.getGlobal();
+	private static final Logger LOGGER = Logger.getGlobal();
+	
+	private static final String BORDER_NAME = "border";
 	
 	/**
 	 * Layout qui est à afficher dans 
@@ -119,29 +121,12 @@ public class LevelScene {
 		int width = level.getWidth();
 		int height = level.getHeight();
 		
-		BLOCK_SIZE = Math.min(Main.getWindowWidth(), Main.getWindowHeight()) / Math.max(width, height);
+		BLOCK_SIZE = Math.min(Main.getWindowWidth(), Main.getWindowHeight()) / Math.max(width+2, height+2); //+2 pour la bordure
 		
-		for (int i=0; i<height; i++) {
-			for (int j=0; j<width; j++) {
-				StackPane imageStack = new StackPane(); //ImageStack contient la pile d'images
-				String[] blocks = level.getToId(j,i);
-				
-				for (String block : blocks) {
-					LOGGER.finest("Refreshing block at x:"+j+"y:"+i+":"+block);
-					ImageView imageview = new ImageView(images.get(block));
-					imageview.setFitWidth(BLOCK_SIZE); //Taille des images
-					imageview.setFitHeight(BLOCK_SIZE);
-					imageStack.getChildren().add(imageview);
-				}
-				
-				//On ajoute la pile d'images à la gille principale
-				GridPane.setConstraints(imageStack, j, i);
-				levellayout.getChildren().add(imageStack);
-			}
-		}
+		
+		update(level); //Affiche les blocs une première fois
 		
 		gridPlusAchievement.getChildren().add(levellayout);
-		
 		
 		//Ajout du label par dessus pour les achievement
 		achievementLabel = new Label();
@@ -157,14 +142,14 @@ public class LevelScene {
 		//Source :https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
 		levelScene.widthProperty().addListener(new ChangeListener<Number>() {
 			 @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-			        BLOCK_SIZE = Math.min(newSceneWidth.intValue(), Main.getWindowWidth()) / Math.max(width, height);
+			        BLOCK_SIZE = Math.min(newSceneWidth.intValue(), Main.getWindowWidth()) / Math.max(width+2, height+2);
 			        update(level);
 			    }
 		});
 		
 		levelScene.heightProperty().addListener(new ChangeListener<Number>() {
 			 @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-			        BLOCK_SIZE = Math.min(Main.getWindowHeight(), newSceneHeight.intValue()) / Math.max(width, height);
+			        BLOCK_SIZE = Math.min(Main.getWindowHeight(), newSceneHeight.intValue()) / Math.max(width+2, height+2);
 			        update(level);
 			    }
 		});
@@ -173,10 +158,10 @@ public class LevelScene {
 			if (newVal) {
 				Screen screen = Screen.getPrimary();
 				Rectangle2D bounds = screen.getVisualBounds();
-				BLOCK_SIZE = (int) (Math.min(bounds.getWidth(), bounds.getHeight()) / Math.max(width, height));
+				BLOCK_SIZE = (int) (Math.min(bounds.getWidth(), bounds.getHeight()) / Math.max(width+2, height+2));
 			}
 			else {
-				BLOCK_SIZE = Math.min(Main.getWindowHeight(), Main.getWindowWidth()) / Math.max(width, height);
+				BLOCK_SIZE = Math.min(Main.getWindowHeight(), Main.getWindowWidth()) / Math.max(width+2, height+2);
 			}
 			update(level);
 			
@@ -317,20 +302,31 @@ public class LevelScene {
 		int width = level.getWidth();
 		int height = level.getHeight();
 		
-		for (int i=0; i<height; i++) {
-			for (int j=0; j<width; j++) {
+		for (int i=-1; i<=height; i++) {
+			for (int j=-1; j<=width; j++) {
 				StackPane imageStack = new StackPane(); //ImageStack contient la pile d'images
-				String[] blocks = level.getToId(j,i);
-				
-				for (String block : blocks) {
-					ImageView imageview = new ImageView(images.get(block));
+				//Si on est hors carte
+				if (i == -1 || i == height || j == -1 || j == width) {
+					System.out.println("in");
+					ImageView imageview = new ImageView(images.get(BORDER_NAME));
 					imageview.setFitWidth(BLOCK_SIZE); //Taille des images
 					imageview.setFitHeight(BLOCK_SIZE);
 					imageStack.getChildren().add(imageview);
 				}
+				else {
+					//Si on est dans la carte
+					String[] blocks = level.getToId(j,i);
+					for (String block : blocks) {
+						LOGGER.finest("Refreshing block at x:"+j+"y:"+i+":"+block);
+						ImageView imageview = new ImageView(images.get(block));
+						imageview.setFitWidth(BLOCK_SIZE); //Taille des images
+						imageview.setFitHeight(BLOCK_SIZE);
+						imageStack.getChildren().add(imageview);
+					}
+				}
 				
 				//On ajoute la pile d'images à la gille principale
-				GridPane.setConstraints(imageStack, j, i);
+				GridPane.setConstraints(imageStack, j+1, i+1);
 				levellayout.getChildren().add(imageStack);
 			}
 		}

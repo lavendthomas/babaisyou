@@ -16,6 +16,7 @@ public enum BlockType {
 	SKULL("skull", BlockStyle.MATERIAL),
 	MONSTER("monster", BlockStyle.MATERIAL),
 	BEST("best", BlockStyle.MATERIAL), // Ne doit pas être utilisée dans le jeu en tant que bloc à part entière.
+	BORDER("border", BlockStyle.MATERIAL), // Ne doit pas être utilisée dans le jeu en tant que bloc à part entière.
 	
 	//SELECTEURS
 	IS("is", BlockStyle.IS, true),
