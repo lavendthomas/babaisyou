@@ -10,6 +10,10 @@ import java.util.logging.SimpleFormatter;
 
 import be.ac.umons.babaisyou.game.Level;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -17,6 +21,10 @@ public class Main extends Application {
 	Stage window; // Fenêtre principale
 	Scene menuScene, levelScene;
 	private static final Logger LOGGER =  Logger.getGlobal();
+	
+	private static int WINDOW_HEIGHT = 940;
+	
+	private static int WINDOW_WIDTH = 940;
 	
 	/**
 	 * Emplactement du thème css qui s'applique
@@ -35,8 +43,8 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		
 		//Logs
-
 		try {
 			LogManager.getLogManager().reset();
 			ConsoleHandler ch = new ConsoleHandler();
@@ -58,17 +66,60 @@ public class Main extends Application {
 			window.setScene(menuScene);
 			window.setTitle("Baba is you");
 			window.setOnCloseRequest(e -> closeProgram());
+			window.setMinWidth(480);
+			window.setMinHeight(480);
 			window.show();
+			
+			window.widthProperty().addListener(new ChangeListener<Number>() {
+				 @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+				        WINDOW_WIDTH = newSceneWidth.intValue();
+				    }
+			});
+			
+			window.heightProperty().addListener(new ChangeListener<Number>() {
+				 @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+				        WINDOW_HEIGHT = newSceneHeight.intValue();
+				    }
+			});
+			
+			window.maximizedProperty().addListener((observableValue, oldVal, newVal) -> {
+				if (newVal) { //Si la fenêtre viens d'être maximisée
+					Screen screen = Screen.getPrimary();
+					Rectangle2D bounds = screen.getVisualBounds();
+					WINDOW_WIDTH = ((Number) bounds.getWidth()).intValue();
+					WINDOW_HEIGHT = ((Number) bounds.getHeight()).intValue();
+				}
+				else {
+					WINDOW_WIDTH = window.heightProperty().getValue().intValue();
+					WINDOW_HEIGHT = window.widthProperty().getValue().intValue();
+				}
+				
+			});
+			
+			
 			
 			SoundPlayer soundplayer = SoundPlayer.getInstance();
 			soundplayer.play(Sounds.BACKGOUND, true);
 
-			
-			 
 		} catch(Exception e) {
-			//TODO Eviter
 			LOGGER.log(java.util.logging.Level.SEVERE, null, e);
 		}
+	}
+	
+	/**
+	 * Renvoie la largeur de la fenêtre
+	 * @return la largeur de la fenêtre en pixels
+	 */
+	public static int getWindowWidth() {
+		return WINDOW_WIDTH;
+	}
+	
+	/**
+	 * Renvoie la hauteur de la fenêtre
+	 * @return la hauteur de la fenêtre en pixels
+	 */
+	public static int getWindowHeight() {
+		return WINDOW_HEIGHT;
 	}
 	
 	public static void main(String[] args) {
@@ -78,8 +129,5 @@ public class Main extends Application {
 	private void closeProgram() {
 		//Save levels
 		window.close();
-	}
-	
-	//Redéfinir init et stop si besoin
-	
+	}	
 }

@@ -39,7 +39,7 @@ public class MenuScene {
 		quitButton.setOnAction(e -> stage.close());
 		menuLayout.getChildren().add(quitButton);
 		
-		menuScene = new Scene(menuLayout,640,640);
+		menuScene = new Scene(menuLayout,Main.getWindowWidth(),Main.getWindowHeight());
 		menuScene.getStylesheets().add(Main.THEME_PATH);
 	}
 	
@@ -49,6 +49,8 @@ public class MenuScene {
 	 * @return
 	 */
 	public static MenuScene getInstance(Stage stage) {
+		stage.setWidth(Main.getWindowWidth());
+		stage.setHeight(Main.getWindowHeight());
 		if (instance == null) {
 			return new MenuScene(stage);
 		} else {

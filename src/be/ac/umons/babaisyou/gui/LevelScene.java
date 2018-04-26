@@ -1,5 +1,6 @@
 package be.ac.umons.babaisyou.gui;
 
+import java.awt.Window;
 import java.io.File;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -10,14 +11,18 @@ import be.ac.umons.babaisyou.game.BlockType;
 import be.ac.umons.babaisyou.game.Direction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -60,8 +65,7 @@ public class LevelScene {
 	
 	private HashMap<String, Image> images; //Pour n'avoir qu'une instance d'image par type de bloc.
 	
-	public static final int BLOCK_SIZE = 50;
-	
+	public static int BLOCK_SIZE;
 	
 	public static final String DELFAUT_IMAGE_LOCATION =  File.separator +
 			"be" + File.separator +"ac"+File.separator+"umons"+File.separator +
@@ -115,6 +119,8 @@ public class LevelScene {
 		int width = level.getWidth();
 		int height = level.getHeight();
 		
+		BLOCK_SIZE = Math.min(Main.getWindowWidth(), Main.getWindowHeight()) / Math.max(width, height);
+		
 		for (int i=0; i<height; i++) {
 			for (int j=0; j<width; j++) {
 				StackPane imageStack = new StackPane(); //ImageStack contient la pile d'images
@@ -144,8 +150,37 @@ public class LevelScene {
 		gridPlusAchievement.getChildren().add(achievementLabel);
 		
 		//Céation de la scène
-		levelScene = new Scene(gridPlusAchievement,BLOCK_SIZE*width,BLOCK_SIZE*height);
+		levelScene = new Scene(gridPlusAchievement,Main.getWindowWidth(),Main.getWindowHeight());
 		levelScene.getStylesheets().add(Main.THEME_PATH);
+		
+		//Permet de redimensionner la fenêtre
+		//Source :https://blog.idrsolutions.com/2012/11/adding-a-window-resize-listener-to-javafx-scene/
+		levelScene.widthProperty().addListener(new ChangeListener<Number>() {
+			 @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+			        BLOCK_SIZE = Math.min(newSceneWidth.intValue(), Main.getWindowWidth()) / Math.max(width, height);
+			        update(level);
+			    }
+		});
+		
+		levelScene.heightProperty().addListener(new ChangeListener<Number>() {
+			 @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+			        BLOCK_SIZE = Math.min(Main.getWindowHeight(), newSceneHeight.intValue()) / Math.max(width, height);
+			        update(level);
+			    }
+		});
+		
+		stage.maximizedProperty().addListener((observableValue, oldVal, newVal) -> {
+			if (newVal) {
+				Screen screen = Screen.getPrimary();
+				Rectangle2D bounds = screen.getVisualBounds();
+				BLOCK_SIZE = (int) (Math.min(bounds.getWidth(), bounds.getHeight()) / Math.max(width, height));
+			}
+			else {
+				BLOCK_SIZE = Math.min(Main.getWindowHeight(), Main.getWindowWidth()) / Math.max(width, height);
+			}
+			update(level);
+			
+		});
 		
 		levelScene.setOnKeyPressed(e -> {
 			LOGGER.finer("Key "+ e.getCode() + "pressed");
@@ -216,6 +251,8 @@ public class LevelScene {
 	 * @return
 	 */
 	public static LevelScene getInstance(ILevelPack levels ,Stage stage) {
+		stage.setWidth(Main.getWindowWidth());
+		stage.setHeight(Main.getWindowHeight());
 		if (instance == null) {
 			return new LevelScene(levels, null,  stage);
 		} else {
@@ -250,13 +287,18 @@ public class LevelScene {
 		instance = null;
 	}
 	
-	
+	/**
+	 * Permet de changer les niveaux associés à la Scene
+	 * @param pack Le nouveau pack de niveau
+	 */
 	public void setLevelPack(ILevelPack pack) {
 		instance = new LevelScene(pack, null, stage);
 		
 	}
 	
-	
+	/**
+	 * Renvoie la scène générée
+	 */
 	public Scene getScene() {
 		if (level == null) {
 			//Renvoyer message d'erreur si niveau corrompu ou invalide
@@ -265,8 +307,11 @@ public class LevelScene {
 		return levelScene;
 	}
 	
+	/**
+	 * Rafraîchit le niveau à l'écran depuis les données dans level
+	 * @param level le niveau à afficher
+	 */
 	private void update(Level level) {
-		
 		levellayout.getChildren().clear();
 		
 		int width = level.getWidth();

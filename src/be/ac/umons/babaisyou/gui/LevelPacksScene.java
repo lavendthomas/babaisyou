@@ -72,8 +72,7 @@ public class LevelPacksScene {
 		
 		levelPacksLayout.setBottom(menu);
 		
-		
-		levelsPackScene = new Scene(levelPacksLayout,640,640);
+		levelsPackScene = new Scene(levelPacksLayout,Main.getWindowWidth(),Main.getWindowHeight());
 		levelsPackScene.getStylesheets().add(Main.THEME_PATH);
 		
 	}
@@ -84,6 +83,8 @@ public class LevelPacksScene {
 	 * @return
 	 */
 	public static LevelPacksScene getInstance(Stage stage) {
+		stage.setWidth(Main.getWindowWidth());
+		stage.setHeight(Main.getWindowHeight());
 		if (instance == null) {
 			return new LevelPacksScene(stage);
 		} else {

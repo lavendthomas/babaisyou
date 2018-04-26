@@ -73,7 +73,7 @@ public class LevelListScene {
 		
 		levelListLayout.setBottom(menu);
 		
-		levelsListScene = new Scene(levelListLayout,640,640);
+		levelsListScene = new Scene(levelListLayout,Main.getWindowWidth(),Main.getWindowHeight());
 		levelsListScene.getStylesheets().add(Main.THEME_PATH);
 	}
 	
@@ -86,6 +86,8 @@ public class LevelListScene {
 	 * @return
 	 */
 	public static LevelListScene getInstance(ILevelPack levels, Scene previousScene, Stage stage) {
+		stage.setWidth(Main.getWindowWidth());
+		stage.setHeight(Main.getWindowHeight());
 		if (instance == null) {
 			return new LevelListScene(levels, previousScene, stage);
 		} else {

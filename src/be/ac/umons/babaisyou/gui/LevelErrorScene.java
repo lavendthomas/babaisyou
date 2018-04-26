@@ -35,7 +35,7 @@ public class LevelErrorScene {
 			});
 			warning.getChildren().add(backButton);
 			
-			levelErrorScene = new Scene(warning,640,640);
+			levelErrorScene = new Scene(warning,Main.getWindowWidth(),Main.getWindowHeight());
 			levelErrorScene.getStylesheets().add(Main.THEME_PATH);
 		}
 		
@@ -45,6 +45,8 @@ public class LevelErrorScene {
 		 * @return
 		 */
 		public static LevelErrorScene getInstance(Stage stage) {
+			stage.setWidth(Main.getWindowWidth());
+			stage.setHeight(Main.getWindowHeight());
 			if (instance == null) {
 				return new LevelErrorScene(stage);
 			} else {

@@ -102,7 +102,7 @@ public class ServerChoiceScene {
 		serverChoiceLayout.setBottom(menu);
 		
 		//Crée la scène
-		serverChoiceScene = new Scene(serverChoiceLayout,640,640);
+		serverChoiceScene = new Scene(serverChoiceLayout,Main.getWindowWidth(),Main.getWindowHeight());
 		serverChoiceScene.getStylesheets().add(Main.THEME_PATH);
 		
 	}
@@ -113,6 +113,8 @@ public class ServerChoiceScene {
 	 * @return
 	 */
 	public static ServerChoiceScene getInstance(Stage stage) {
+		stage.setWidth(Main.getWindowWidth());
+		stage.setHeight(Main.getWindowHeight());
 		if (instance == null) {
 			return new ServerChoiceScene(stage);
 		} else {

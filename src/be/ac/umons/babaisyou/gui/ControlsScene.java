@@ -186,7 +186,7 @@ public class ControlsScene {
 		
 		contolsLayout.setBottom(menu);
 		
-		controlsScene = new Scene(contolsLayout,640,640);
+		controlsScene = new Scene(contolsLayout,Main.getWindowWidth(),Main.getWindowHeight());
 		controlsScene.getStylesheets().add(Main.THEME_PATH);
 
 	}
@@ -233,6 +233,8 @@ public class ControlsScene {
 	 * @return
 	 */
 	public static ControlsScene getInstance(Stage stage) {
+		stage.setWidth(Main.getWindowWidth());
+		stage.setHeight(Main.getWindowHeight());
 		if (instance == null) {
 			return new ControlsScene(stage);
 		} else {
