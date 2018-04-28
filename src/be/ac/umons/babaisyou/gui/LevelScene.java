@@ -1,6 +1,5 @@
 package be.ac.umons.babaisyou.gui;
 
-import java.awt.Window;
 import java.io.File;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -113,6 +112,7 @@ public class LevelScene {
 		StackPane gridPlusAchievement = new StackPane();
 		
 		levellayout = new GridPane();
+		levellayout.getStyleClass().add("level-background");
 		levellayout.setPadding(new Insets(10,10,10,10));
 		levellayout.setVgap(0); //espace entre les cellules
 		levellayout.setHgap(0);
@@ -307,7 +307,6 @@ public class LevelScene {
 				StackPane imageStack = new StackPane(); //ImageStack contient la pile d'images
 				//Si on est hors carte
 				if (i == -1 || i == height || j == -1 || j == width) {
-					System.out.println("in");
 					ImageView imageview = new ImageView(images.get(BORDER_NAME));
 					imageview.setFitWidth(BLOCK_SIZE); //Taille des images
 					imageview.setFitHeight(BLOCK_SIZE);

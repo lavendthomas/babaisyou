@@ -4,6 +4,11 @@
     -fx-background-color: #333333;
     -fx-text-fill: #FFFFFF;
 }
+
+.level-background {
+	-fx-background-color: #111111;
+	-fx-text-fill: #FFFFFF;
+}
 .label{
 	-fx-text-fill: #FFFFFF;
 	-fx-font-size: 16px;
@@ -35,8 +40,8 @@
 }
 
 .button-mainmenu:hover {
-	-fx-min-width: 250;
-	-fx-min-height: 42;
+	-fx-scale-y: 1.1;
+	-fx-scale-x: 1.1;
 }
 
 .list-cell {

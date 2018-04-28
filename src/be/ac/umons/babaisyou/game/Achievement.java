@@ -1,15 +1,11 @@
 package be.ac.umons.babaisyou.game;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import be.ac.umons.babaisyou.gui.LevelScene;

@@ -70,6 +70,11 @@ public class Level {
 	private boolean hasWon;
 	
 	/**
+	 * Indique si un le rafraîchissement des règles doit être fait.
+	 */
+	private boolean mustParseRules;
+	
+	/**
 	 * HashMap contenant toutes les règles en vigeur pendant une partie.
 	 */
 	private HashMap<BlockType, List<Action>> rules;
@@ -154,6 +159,14 @@ public class Level {
 		return hasWon;
 	}
 	
+	
+	/**
+	 * Demande de réanalyser les règles pour le tour suivant.
+	 */
+	void requestRuleParsing() {
+		mustParseRules = true;
+	}
+	
 	/**
 	 * Renvoie tous les blocs à une position. (obselète)
 	 * @param position
@@ -191,6 +204,9 @@ public class Level {
 	 */
 	void remove(Block block, Position position) {
 		board.remove(block, position);
+		for (BlockType player : playerTypes) {
+			playerPositions.get(player).remove(position);
+		}
 	}
 	
 	/**
@@ -199,6 +215,9 @@ public class Level {
 	 */
 	void pop(Position position) {
 		board.pop(position);
+		for (BlockType player : playerTypes) {
+			playerPositions.get(player).remove(position);
+		}
 	}
 	
 	/**
@@ -211,6 +230,7 @@ public class Level {
 		for (Block block : get(position)) {
 			if (playerTypes.contains(block.getType())) {
 				remove(block, position);
+				playerPositions.get(block.getType()).remove(position);
 				return block;
 			}
 		}
@@ -259,7 +279,9 @@ public class Level {
 		LinkedList<String> blocks = new LinkedList<String>();
 		Position position = new Position(x,y);
 		for (Block block : board.get(position)) {
-			blocks.add(block.getId());
+			if (block != null) {
+				blocks.add(block.getId());
+			}
 		}
 		//Si la case est vide alors on ajoute le bloc par défaut (VOID)
 		if (blocks.size() == 0) {
@@ -301,6 +323,7 @@ public class Level {
 		if (canmove) {
 			achievement.onMove();
 			for (BlockType type : playerTypes) {
+				List<Position> newPositions = new ArrayList<Position>(); // Stocke la nouvelle position de tout les joueurs de ce type
 				for (Position position : playerPositions.get(type)) {
 					
 					if (canMove(position, direction)) {
@@ -310,15 +333,24 @@ public class Level {
 						if (hasPushable(nextPosition)) {
 							push(nextPosition, direction);
 						}
-						
 						board.add(player, nextPosition);
+						newPositions.add(nextPosition);
 						
 						 // Lancer les actions pour les blocks sur lesquels les joueurs tombent
 						if (player != null) {
 							launchActions(nextPosition, player.getDirection());
 						}
+					} else {
+						newPositions.add(position);
 					}
+					playerPositions.put(type, newPositions);
 				}
+			}
+			// Recaluler les règles uniquement si on a déplacé un block (Sauf le joueur car on ne controle pas un bloc de règle)
+			if (mustParseRules) {
+				updatePlayerList();
+				parseRules();
+				mustParseRules = false;
 			}
 		}
 		executeGlobalActions();
@@ -340,25 +372,24 @@ public class Level {
 						isPositions.add(new Position(x,y));
 					}
 				}
-					
 			}
 		}
 	}
 	
 	/*
-	 * Execute les regles globales
+	 * Recalcule les règles globales.
 	 */
 	private void executeGlobalActions() {
-		updatePlayerList();
-		parseRules();
-		
 		for (BlockType type : rules.keySet()) {
 			for (Action rule : rules.get(type)) {
 				rule.onEachTour(type);
 			}
 		}
-		updatePlayerList();
-		parseRules();
+		if (mustParseRules) {
+			updatePlayerList();
+			parseRules();
+			mustParseRules = false;
+		}
 	}
 	
 	
@@ -372,6 +403,7 @@ public class Level {
 	 * @param direction la direction dans laquelle le joueur veux pousser le bloc.
 	 */
 	private void push(Position current, Direction direction) {
+		mustParseRules = true; //Dès qu'un block est poussé, on demande de recalculer les règles.
 		if (canPush(current, direction)) {
 			Position nextPos = current.nextPosition(direction);
 			
@@ -426,7 +458,12 @@ public class Level {
 					if (player != null) {
 						launchActions(nextPosition, player.getDirection());
 					}
+					if (isPlayer(block)) { //Préciser les positions si le block qu'on déplace est un joueur.
+						playerPositions.get(block.getType()).remove(position);
+						playerPositions.get(block.getType()).add(nextPosition);
+					}
 				}
+				
 				
 			}
 		}
@@ -677,6 +714,9 @@ public class Level {
 	 * @return true si un des blocks a la propriété "Is"
 	 */
 	boolean hasIs(Position position) {
+		if (get(position).length == 0) {
+			return false;
+		}
 		for (Block block : get(position)) {
 			if (block.getType() == BlockType.IS) {
 				return true;
@@ -691,6 +731,9 @@ public class Level {
 	 * @return true si un des blocks a la propriété "Pushable"
 	 */
 	boolean hasPushable(Position position) {
+		if (get(position).length == 0) {
+			return false;
+		}
 		for (Block block : get(position)) {
 			if (isPushable(block.getType())) {
 				return true;
@@ -705,6 +748,9 @@ public class Level {
 	 * @return true si un des blocks a la propriété "Blocking"
 	 */
 	boolean hasBlocking(Position position) {
+		if (get(position).length == 0) {
+			return false;
+		}
 		for (Block block : get(position)) {
 			if (isBlocking(block.getType())) {
 				return true;
@@ -719,6 +765,9 @@ public class Level {
 	 * @return true si un des blocks a la propriété "BEST"
 	 */
 	boolean hasBest(Position position) {
+		if (get(position).length == 0) {
+			return false;
+		}
 		for (Block block : get(position)) {
 			if (isBest(block.getType())) {
 				return true;
@@ -734,6 +783,9 @@ public class Level {
 	 * @return Renvoie vrai si un des blocs à la position mensionnée a un bloc contrôlable par le joueur
 	 */
 	boolean hasPlayer(Position position) {
+		if (get(position).length == 0) {
+			return false;
+		}
 		for (Block block : get(position)) {
 			if (isPlayer(block)) {
 				return true;
@@ -749,6 +801,9 @@ public class Level {
 	 * @return true si il existe au moins un bloc du type mensionné à la position memsionnée
 	 */
 	boolean hasBlockType(BlockType type, Position position) {
+		if (get(position).length == 0) {
+			return false;
+		}
 		for (Block block : get(position)) {
 			if (block.isSameType(type)) {
 				return true;
@@ -1031,6 +1086,8 @@ public class Level {
 			}
 			res += "\n";
 		}
+		res += "PlayersTypes : " + playerTypes + "\n";
+		res += "PlayersPositions : " + playerPositions + "\n";
 		return res;
 	}
 	

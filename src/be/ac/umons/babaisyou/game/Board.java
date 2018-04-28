@@ -54,7 +54,9 @@ public class Board {
 	 * @param position L'emplacement ou mettre le bloc.
 	 */
 	public void add(Block block, Position position) {
-		board[position.getY()][position.getX()].add(block);
+		if (block != null) {
+			board[position.getY()][position.getX()].add(block);
+		}
 	}
 	
 	public Block pop(BlockType type, Position position) {

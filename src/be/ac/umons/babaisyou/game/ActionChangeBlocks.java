@@ -47,6 +47,7 @@ public class ActionChangeBlocks extends Action {
 					
 			}
 		}
+		level.requestRuleParsing();
 	}
 
 	@Override
