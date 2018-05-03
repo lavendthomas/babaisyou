@@ -143,7 +143,7 @@ public class ServerChoiceScene {
 			// Ajout à l'historique des servers
 			if (!servers.contains(ip)) {
 				try (BufferedWriter buffer = new BufferedWriter(new FileWriter(new File(SERVER_HISTORY_LOCATION), true))) {
-					buffer.append(ip);
+					buffer.append(ip + "\n");
 					updateServers();
 				} catch (IOException e) {
 					LOGGER.log(Level.WARNING, "Could not write to history file : " + e.getMessage());
@@ -200,7 +200,6 @@ public class ServerChoiceScene {
 		//Remove folder data
 		File serverFolder = new File(SERVER_FOLDER_LOCATION);
 		for (File folder : serverFolder.listFiles()) {
-			System.out.println(folder.getPath());
 			if (folder.isDirectory()) {
 				delete(folder);
 			}

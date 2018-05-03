@@ -133,10 +133,6 @@ public class LevelPackOnline implements ILevelPack {
 			// N'arrive jamais car toujour algorithme SHA-256
 			throw new RuntimeException(e);
 		}
-
-		
-		
-		
 	}
 	
 	
