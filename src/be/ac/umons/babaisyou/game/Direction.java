@@ -134,6 +134,10 @@ public enum Direction {
 		}
 	}
 	
+	/**
+	 * Renvoie la position opposée.
+	 * @return la direction opposée
+	 */
 	public Direction getOpposite() {
 		switch (this) {
 		case UP:

@@ -88,9 +88,9 @@ public class LevelScene {
 			try {
 				File img = new File(DELFAUT_IMAGE_LOCATION + type.getId() + DELFAUT_IMAGE_EXTENSION);
 				img.exists();
-				image = new Image(DELFAUT_IMAGE_LOCATION + type.getId() + DELFAUT_IMAGE_EXTENSION);
+				image = new Image(DELFAUT_IMAGE_LOCATION + type.getId() + DELFAUT_IMAGE_EXTENSION, BLOCK_SIZE, BLOCK_SIZE, false, false);
 			} catch (IllegalArgumentException e) {
-				image = new Image(DELFAUT_IMAGE_LOCATION + type.getId() + ALTERNATE_IMAGE_EXTENSION);
+				image = new Image(DELFAUT_IMAGE_LOCATION + type.getId() + ALTERNATE_IMAGE_EXTENSION, BLOCK_SIZE, BLOCK_SIZE, false, false);
 			}
 			
 			images.put(type.getId(), image);

@@ -3,6 +3,8 @@ package be.ac.umons.babaisyou.game;
 /**
  * Représente la règle HOT.
  * 
+ * Un bloc ayant la propriété "HOT" fait disparaître tout block ayant la propriété "MELT" qui est sur la même cellule.
+ * 
  * @author Thomas Lavend'Homme
  *
  */

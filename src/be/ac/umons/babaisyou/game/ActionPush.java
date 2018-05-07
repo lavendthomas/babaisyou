@@ -1,9 +1,9 @@
 package be.ac.umons.babaisyou.game;
 
 /**
- * Représente la règle PUSH.
+ * Représente la règle "PUSH".
  * 
- * PUSH permet au joueur de déplacer un bloc en ce déplaçant vers lui.
+ * "PUSH" permet au joueur de déplacer un bloc en ce déplaçant vers lui.
  * 
  * @author Thomas Lavend'Homme
  *

@@ -30,30 +30,42 @@ public abstract class Action {
 	public abstract void execute(Block block, Position player_position, Direction player_direction);
 	
 	/**
-	 * Excecute l'action á faire á chaque tour.
+	 * Excecute l'action à faire à chaque tour.
 	 * @param le type de block auquel l'action est associée
 	 */
 	public abstract void onEachTour(BlockType type) ;
 	
 	/**
-	 * Renvoie si le joueur peux se déplacer.
-	 * @return true si le joueur peux se déplacer, false sinon.
+	 * Renvoie si la règle a la propriété "STOP".
+	 * @return true si la règle a la propriété "STOP". false sinon.
 	 */
 	public boolean isBlocking() {
 		//Ne permet pas de bloquer si aucune règle l'autorise.
 		return false;
 	}
 	
+	/**
+	 * Renvoie si la règle a la propriété "PUSH".
+	 * @return true si la règle a la propriété "PUSH".. false sinon.
+	 */
 	public boolean isPushable() {
 		//Ne permet pas de pusher si aucune règle l'autorise.
 		return false;
 	}
 	
+	/**
+	 * Renvoie si la règle a la propriété "BEST".
+	 * @return true si la règle a la propriété "BEST". false sinon.
+	 */
 	public boolean isBest() {
 		//N'est pas BEST par défaut.
 		return false;
 	}
 	
+	/**
+	 * Renvoie si la règle a la propriété "HOT".
+	 * @return true si la règle a la propriété "HOT". false sinon.
+	 */
 	public boolean isHot() {
 		//N'est pas HOT par défaut.
 		return false;

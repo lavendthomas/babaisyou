@@ -1,5 +1,13 @@
 package be.ac.umons.babaisyou.game;
 
+/**
+ * Représente la règle du jeu "BEST".
+ * 
+ * Lorsque un bloc à la propriété "BEST", un overlay doit lui être appliqué.
+ * 
+ * @author thomas
+ *
+ */
 public class ActionBest extends Action {
 	
 	@Override

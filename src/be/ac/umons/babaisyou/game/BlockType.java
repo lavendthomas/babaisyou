@@ -2,6 +2,12 @@ package be.ac.umons.babaisyou.game;
 
 import be.ac.umons.babaisyou.exceptions.BlockNotFoundException;
 
+/**
+ * Modélise un type de bloc.
+ * 
+ * @author Thomas Lavend'Homme
+ *
+ */
 public enum BlockType {
 	//Matériaux, aucune action par nature.
 	VOID("void", BlockStyle.MATERIAL),
@@ -34,7 +40,7 @@ public enum BlockType {
 	
 	//ACTION
 	WIN("win", BlockStyle.ACTION, new ActionWin(), true),
-	STOP("stop", BlockStyle.ACTION, new ActionBlocking(), true),
+	STOP("stop", BlockStyle.ACTION, new ActionBlock(), true),
 	PUSH("push", BlockStyle.ACTION, new ActionPush(), true),
 	YOU("you", BlockStyle.ACTION, new ActionNull(),  true),
 	SINK("sink", BlockStyle.ACTION, new ActionSink(),  true),

@@ -3,7 +3,7 @@ package be.ac.umons.babaisyou.game;
 /**
  * Représente la règle MELT.
  * 
- * MELT fait fondre le block si un hot est aussi présent sur la même case.
+ * "MELT" fait fondre le block si un "HOT" est aussi présent sur la même case.
  * 
  * @author Thomas Lavend'Homme
  *

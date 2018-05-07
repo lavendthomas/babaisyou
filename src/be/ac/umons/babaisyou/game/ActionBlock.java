@@ -1,7 +1,9 @@
 package be.ac.umons.babaisyou.game;
 
 /**
- * Représente la règle STOP.
+ * Représente la règle "STOP".
+ * 
+ * "STOP" empêche tout bloc de se déplacer sur un bloc ayant cette propriété.
  * 
  * @author Thomas Lavend'Homme
  *

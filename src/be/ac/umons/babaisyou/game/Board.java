@@ -11,12 +11,18 @@ import be.ac.umons.babaisyou.exceptions.NotADirectionException;
 public class Board {
 	
 	/*
-	 * //TODO Javadoc?
-	 * Stocke tous les blocks.
+	 * Chaque cellule de ce tableau contient la liste de tous les blocs qui sont à la position associée à cette cellule.
 	 */
 	private ArrayList<Block>[][] board;
 	
+	/**
+	 * La largeur du niveau.
+	 */
 	private int width;
+	
+	/**
+	 * La hauteur du niveau.
+	 */
 	private int height;
 	
 	
@@ -194,7 +200,6 @@ public class Board {
 						}
 	
 					} catch (NotADirectionException e) {
-						// TODO Auto-generated catch block
 						throw new RuntimeException(e);
 					}
 				}

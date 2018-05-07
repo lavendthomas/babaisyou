@@ -24,8 +24,14 @@ public class Achievement {
 	
 	private static final Logger LOGGER =  Logger.getGlobal();
 	
+	/**
+	 * Chamin d'accès du fichier où sont stockés les achievements
+	 */
 	private final static String ACHIEVEMENTS_FILE = "achievements";
 	
+	/**
+	 * Les succès sont stockés dans cette HashMap, chaque succès ont un identifiant textuel et une valeur entière assocciée.
+	 */
 	private HashMap<String, Integer> data;
 	
 	
@@ -35,6 +41,9 @@ public class Achievement {
 		load();
 	}
 	
+	/**
+	 * Traite le cas lorsque un joueur se déplace.
+	 */
 	public void onMove() {
 		data.put("moves", data.get("moves") + 1);
 		//Sauvegarder sur disque tous les 25 déplacements
@@ -51,6 +60,9 @@ public class Achievement {
 		
 	}
 	
+	/**
+	 * Traite le cas lorsque un joueur gagne.
+	 */
 	public void onWin() {
 		data.put("wins", data.get("wins") + 1);
 		switch (data.get("wins")) {
@@ -61,6 +73,9 @@ public class Achievement {
 		}
 	}
 	
+	/**
+	 * Traite le cas lorsque un joueur recommence un niveau.
+	 */
 	public void onReload() {
 		data.put("reloads", data.get("reloads") + 1);
 		switch (data.get("reloads")) {
@@ -71,6 +86,9 @@ public class Achievement {
 		}
 	}
 	
+	/**
+	 * Traite le cas lorsque un joueur meurt (se déplace dans KILL).
+	 */
 	public void onDeath() {
 		data.put("deaths", data.get("deaths") + 1);
 		switch (data.get("deaths")) {

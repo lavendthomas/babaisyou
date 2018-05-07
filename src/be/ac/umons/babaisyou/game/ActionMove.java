@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Représente la règle MOVE.
+ * Représente la règle "MOVE".
  * 
- * MOVE déplace tout les blocs de ce type vers la direction par défaut de chaque bloc.
+ * "MOVE" déplace tout les blocs de ce type vers la direction par défaut de chaque bloc.
  * 
  * @author Thomas Lavend'Homme
  *
