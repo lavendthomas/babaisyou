@@ -131,7 +131,7 @@ public class Level {
 	
 	/**
 	 * Renvoie la hauteur du niveau
-	 * @return
+	 * @return la hauteur du niveau
 	 */
 	public int getHeight() {
 		return height;
@@ -139,7 +139,7 @@ public class Level {
 	
 	/**
 	 * Renvoie la largeur du niveau
-	 * @return
+	 * @return la largeur du niveau
 	 */
 	public int getWidth() {
 		return width;
@@ -169,7 +169,7 @@ public class Level {
 	
 	/**
 	 * Renvoie tous les blocs à une position. (obselète)
-	 * @param position
+	 * @param position la position à laquelle on veux les blocs.
 	 * @return 
 	 */
 	public Block[] getBlocksAt(Position position) {
@@ -178,7 +178,7 @@ public class Level {
 	
 	/**
 	 * Renvoie tous les blocs à une position.
-	 * @param position
+	 * @param position la position à laquelle on veux les blocs
 	 * @return 
 	 */
 	public Block[] get(Position position) {
@@ -187,8 +187,9 @@ public class Level {
 	
 	/**
 	 * Utilisée pour les tests unitaires
-	 * @param block
-	 * @param position
+	 * Permet de fixer les blocks à un emplacement précis.
+	 * @param block Le bloc à placer
+	 * @param position La position où placer le bloc
 	 */
 	void set(Block block, Position position) {
 		board.set(block, position);
@@ -282,8 +283,9 @@ public class Level {
 	
 	/**
 	 * Renvoie tous les élements à une position sous forme de chaîne de charactères.
-	 * @param position
-	 * @return 
+	 * @param x la distance horizontale par rapport au bloc supérieur gauche
+	 * @param y la distance verticale par rapport au bloc supérieur gauche
+	 * @return Une liste de chaîne de caractères de tous les blocs à une position
 	 */
 	public String[] getToId(int x,int y) {
 		LinkedList<String> blocks = new LinkedList<String>();
@@ -308,7 +310,7 @@ public class Level {
 	
 	/**
 	 * Fait bouger tous les joueurs dans la direction donnée l'état du jeu le permet.
-	 * Ensuite, exécute un cycle du jeu en fonction des règles.
+	 * Ensuite, exécute un tour de jeu en fonction des règles.
 	 * 
 	 * @param direction La direction dans laquelle déplacer les joueurs
 	 */
@@ -540,6 +542,7 @@ public class Level {
 	/**
 	 * Lance toutes les règles définies pour tous les blocks à la position donnée.
 	 * @param position La position où les règles doivent être exécutées.
+	 * @param direction La direction dans laquelle faire les règles.
 	 */
 	private void launchActions(Position position, Direction direction) {
 		for (Block block : get(position)) {
@@ -829,7 +832,6 @@ public class Level {
 	 * 
 	 * Et pour chaque BlockType, une liste de la position de tous les joueurs de ce BlockType sera
 	 * ajoutée dans la HashMap "playerPositions"
-	 * 
 	 */
 	private void updatePlayerList() {
 		

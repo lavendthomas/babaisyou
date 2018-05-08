@@ -1,7 +1,7 @@
 package be.ac.umons.babaisyou.game;
 
 /**
- * Repréente une catégorie de bloc dans le monde.
+ * Représente une catégorie de bloc dans le monde.
  * 
  * @author Thomas Lavend'Homme
  *
