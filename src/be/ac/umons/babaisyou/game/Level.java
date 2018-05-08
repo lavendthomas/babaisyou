@@ -166,15 +166,7 @@ public class Level {
 	void requestRuleParsing() {
 		mustParseRules = true;
 	}
-	
-	/**
-	 * Renvoie tous les blocs à une position. (obselète)
-	 * @param position la position à laquelle on veux les blocs.
-	 * @return 
-	 */
-	public Block[] getBlocksAt(Position position) {
-		return board.get(position);
-	}
+
 	
 	/**
 	 * Renvoie tous les blocs à une position.
