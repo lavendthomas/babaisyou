@@ -20,7 +20,13 @@ public class ActionSink extends Action {
 	@Override
 	public void execute(Block block, Position player_position, Direction player_direction) {
 		level.remove(block, player_position);
-		level.pop(player_position);
+		Block deleted = level.pop(player_position);
+		if (!deleted.getType().isMaterial()) {
+			System.out.println(block + "" +block.getType());
+			level.add(block, player_position); //readd the water
+			level.add(deleted, player_position);
+		}
+		
 		
 	}
 

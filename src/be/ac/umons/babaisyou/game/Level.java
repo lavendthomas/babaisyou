@@ -210,14 +210,24 @@ public class Level {
 	}
 	
 	/**
+	 * Ajoute un élement à la carte.
+	 * @param block L'élément à placer
+	 * @param position L'emplacement ou mettre le bloc.
+	 */
+	void add(Block block, Position position) {
+		board.add(block, position);
+	}
+	
+	/**
 	 * Supprime le premier bloc à la position mensionnée
 	 * @param position
 	 */
-	void pop(Position position) {
-		board.pop(position);
+	Block pop(Position position) {
+		Block popped = board.pop(position);
 		for (BlockType player : playerTypes) {
 			playerPositions.get(player).remove(position);
 		}
+		return popped;
 	}
 	
 	/**

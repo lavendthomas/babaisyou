@@ -1,6 +1,7 @@
 package be.ac.umons.babaisyou.game;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+
 import be.ac.umons.babaisyou.exceptions.NotADirectionException;
 
 /**
@@ -13,7 +14,7 @@ public class Board {
 	/*
 	 * Chaque cellule de ce tableau contient la liste de tous les blocs qui sont à la position associée à cette cellule.
 	 */
-	private ArrayList<Block>[][] board;
+	private LinkedList<Block>[][] board;
 	
 	/**
 	 * La largeur du niveau.
@@ -32,14 +33,15 @@ public class Board {
 	 * @param width La largeur de la carte
 	 * @param height La hauteur de la carte
 	 */
+	@SuppressWarnings("unchecked")
 	public Board(int width, int height) {
-		board = new ArrayList[height][width];
+		board = (LinkedList<Block>[][]) new LinkedList[height][width];
 		this.height = height;
 		this.width = width;
 		
 		for (int x=0; x<width; x++) {
 			for (int y=0; y<height; y++) {
-				board[y][x] = new ArrayList<Block>();
+				board[y][x] = new LinkedList<Block>();
 			}
 		}
 	}
@@ -50,7 +52,7 @@ public class Board {
 	 * @param position L'emplacement ou mettre le bloc.
 	 */
 	public void set(Block block, Position position) {
-		board[position.getY()][position.getX()] = new ArrayList<Block>();
+		board[position.getY()][position.getX()] = new LinkedList<Block>();
 		board[position.getY()][position.getX()].add(block);
 	}
 	
@@ -81,7 +83,7 @@ public class Board {
 	/**
 	 * Supprime le premier bloc à la position mensionnée
 	 * @param position
-	 * @return
+	 * @return le block à la position mensionnée
 	 */
 	Block pop(Position position) {
 		Block blockToPop = board[position.getY()][position.getX()].get(0);
@@ -95,7 +97,7 @@ public class Board {
 	 * @return Le bloc à la position mensionnée
 	 */
 	public Block[] get(Position position) {
-		ArrayList<Block> blocks = board[position.getY()][position.getX()];
+		LinkedList<Block> blocks = board[position.getY()][position.getX()];
 		return blocks.toArray(new Block[blocks.size()]);
 	}
 	
