@@ -88,7 +88,6 @@ public class LevelPack implements ILevelPack {
 			throw new RuntimeException(e);
 			
 		} catch (IOException e) {
-			//TODO Prévenir lútilisateur dans le GUI
 			LOGGER.log(java.util.logging.Level.SEVERE, null, e);
 			throw new RuntimeException(e);
 		}
@@ -107,7 +106,6 @@ public class LevelPack implements ILevelPack {
 		} catch (FileNotFoundException e) {
 			// Si aucune session précédente n'a été faite, il ne faut rien ajouter à alreadyPlayedLevels
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			LOGGER.log(java.util.logging.Level.SEVERE, "Problem occured while reading already played Levels", e);
 			throw new RuntimeException(e);
 		}

@@ -176,7 +176,6 @@ public class ServerChoiceScene {
 			} catch (FileNotFoundException e) {
 				LOGGER.log(Level.WARNING, "Could not load history file : " + e.getMessage());
 			} catch (IOException e) {
-				//TODO gérer GUI
 				LOGGER.log(Level.WARNING, "Could not load history file : " + e.getMessage());
 			}
 		}

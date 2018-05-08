@@ -1007,7 +1007,6 @@ public class Level {
 				try {
 					level.board.add(new Block(BlockType.fromId(id), Direction.fromInt(dir)), new Position(x,y));
 				} catch (NotADirectionException e) {
-					// TODO Auto-generated catch block
 					throw new WrongFileFormatException();
 				}
 			}

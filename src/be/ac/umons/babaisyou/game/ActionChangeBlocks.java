@@ -53,7 +53,7 @@ public class ActionChangeBlocks extends Action {
 
 	@Override
 	public void onEachTour(BlockType type) {
-		// TODO Auto-generated method stub
+		//Ne rien faire
 		
 	}
 

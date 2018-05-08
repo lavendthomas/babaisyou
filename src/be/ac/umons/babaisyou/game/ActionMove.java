@@ -22,8 +22,6 @@ public class ActionMove extends Action {
 	@Override
 	public void onEachTour(BlockType type) {
 		
-		// TODO Auto-generated method stub
-		
 		List<Position> movingBlocksPositions = new LinkedList<Position>();
 		
 		for (int x=0; x < level.getWidth(); x++) {

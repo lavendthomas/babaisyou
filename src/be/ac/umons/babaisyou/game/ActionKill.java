@@ -12,9 +12,9 @@ public class ActionKill extends Action {
 
 	@Override
 	public void execute(Block block, Position player_position, Direction player_direction) {
-		// TODO Auto-generated method stub
 		
 		while (level.hasPlayer(player_position)) {
+			//Tue tous les joueurs sur la case
 			level.getAchievement().onDeath();
 			level.popPlayer(player_position);
 		}
@@ -23,8 +23,7 @@ public class ActionKill extends Action {
 
 	@Override
 	public void onEachTour(BlockType type) {
-		// TODO Auto-generated method stub
-		
+		//Ne rien faire
 	}
 
 }

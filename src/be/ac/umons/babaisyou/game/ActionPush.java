@@ -18,13 +18,13 @@ public class ActionPush extends Action{
 
 	@Override
 	public void execute(Block block, Position player_position, Direction player_direction) {
-		// TODO Auto-generated method stub
+		//Ne rien faire
 		
 	}
 
 	@Override
 	public void onEachTour(BlockType type) {
-		// TODO Auto-generated method stub
+		//Ne rien faire
 		
 	}
 }
