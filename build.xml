@@ -45,8 +45,7 @@
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.xtend"/>
+                <exclude name="**/*.ucls"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -77,15 +76,6 @@
     <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
-    </target>
-    <target name="Test">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="be.ac.umons.babaisyou.game.Test" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="babaisyou.classpath"/>
-        </junit>
     </target>
     <target name="run">
         <java classname="be.ac.umons.babaisyou.gui.Main" failonerror="true" fork="yes">
