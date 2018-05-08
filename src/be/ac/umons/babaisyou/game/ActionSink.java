@@ -14,20 +14,18 @@ public class ActionSink extends Action {
 	 * Fait couler le joueur et retire le block qui a la propriété sink.
 	 * 
 	 * @param block le block qui a déclanché l'exécution de l'action
-	 * @param player_position la position du joueur (INUTILISÉE)
-	 * @param player la direction du dernier mouvement du joueur (INUTILISÉE)
+	 * @param player_position la position du joueur 
+	 * @param player la direction du dernier mouvement du joueur
 	 */
 	@Override
 	public void execute(Block block, Position player_position, Direction player_direction) {
 		level.remove(block, player_position);
 		Block deleted = level.pop(player_position);
 		if (!deleted.getType().isMaterial()) {
-			System.out.println(block + "" +block.getType());
-			level.add(block, player_position); //readd the water
+			//Reajouter l'eau et la position qui ont été supprimées erronément
+			level.add(block, player_position); 
 			level.add(deleted, player_position);
 		}
-		
-		
 	}
 
 	@Override
