@@ -82,7 +82,7 @@
             <classpath refid="babaisyou.classpath"/>
         </java>
     </target>
-    <target name="test">
+    <target depends="build" name="test">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
