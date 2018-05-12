@@ -1,6 +1,7 @@
 package be.ac.umons.babaisyou.game;
 
 /**
+ * Change tous les blocs d'un type vers un autre type.
  * 
  * @author Thomas Lavend'Homme
  *

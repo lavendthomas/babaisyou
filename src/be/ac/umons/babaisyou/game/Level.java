@@ -947,6 +947,7 @@ public class Level {
 			
 			String[] dims = dimLine.split(" ");
 			if (dims.length != 2) {
+				LOGGER.severe("The first line of the level files doesn't contain the dimensions of the level.");
 				throw new WrongFileFormatException();
 			}
 			
@@ -956,7 +957,7 @@ public class Level {
 			Level level = new Level(width, height, file.getName());
 			
 			/*
-			 * Ajout des blocs un a un.
+			 * Ajout des blocs un à un.
 			 */
 			String line;
 			String id;
@@ -964,7 +965,7 @@ public class Level {
 			int y;
 			int dir;
 			
-			while ((line = buffer.readLine()) != null) { //null si le fichier est vide.
+			while ((line = buffer.readLine()) != null) { //null si le fichier est vide ou si on est à la fin du fichier.
 				if (line.length() == 0) {
 					//Passer les lignes blanches
 					continue;
@@ -977,6 +978,8 @@ public class Level {
 				 */
 				if (splitLine.length < 3 || splitLine.length > 4) {
 					//incompatible
+					LOGGER.severe("A line of the file doesn't respect the stucture of a Level line. "
+							+ "There is " + splitLine.length + "lines instead of 3 or 4. \nLine : " + line);
 					throw new WrongFileFormatException();
 				}
 				
@@ -984,6 +987,15 @@ public class Level {
 				try {
 					x = Integer.parseInt(splitLine[1]);
 					y = Integer.parseInt(splitLine[2]);
+					
+					Position blockPosition = new Position(x,y);
+					//Si un bloc est hors niveau, alors le niveau n'est pas valide
+					if (!level.isInLevel(blockPosition)) {
+						LOGGER.severe("A block is out of level : " + id + " " + blockPosition);
+						throw new WrongFileFormatException();
+					}
+					
+					
 					if (splitLine.length == 3) {
 						//directin par défaut
 						dir = 0;
@@ -992,6 +1004,8 @@ public class Level {
 						dir = Integer.parseInt(splitLine[3]);
 					}
 				} catch (NumberFormatException e) {
+					LOGGER.severe("The second to forth columns of a Level file must only contain integers. "
+							+ "These contains the position and defaut direction of the block. " + e.getMessage());
 					throw new WrongFileFormatException();
 				}
 				
@@ -1001,6 +1015,7 @@ public class Level {
 				try {
 					level.board.add(new Block(BlockType.fromId(id), Direction.fromInt(dir)), new Position(x,y));
 				} catch (NotADirectionException e) {
+					LOGGER.severe("The forth column of the line should only contain an integer from 0 to 3. " + e.getMessage());
 					throw new WrongFileFormatException();
 				}
 			}
